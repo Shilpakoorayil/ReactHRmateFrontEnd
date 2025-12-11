@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@hrmate.local",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "email": "manager@hrmate.local",
+      "password": "manager123",
+      "role": "manager"
+    },
+    {
+      "id": "3",
+      "email": "john@hrmate.local",
+      "password": "john123",
+      "role": "employee"
+    }
+  ],
+  "employees": [
+    {
+      "id": "1",
+      "name": "Sophia",
+      "email": "sophia@example.com",
+      "role": "Product Manager",
+      "bio": "Senior PM"
+    },
+    {
+      "id": "2",
+      "name": "Mason",
+      "email": "mason@example.com",
+      "role": "Product Designer",
+      "bio": "UX Specialist"
+    },
+    {
+      "id": "3",
+      "name": "Emily",
+      "email": "emily@example.com",
+      "role": "Product Manager",
+      "bio": "Roadmap lead"
+    },
+    {
+      "id": "4",
+      "name": "Daniel",
+      "email": "daniel@example.com",
+      "role": "Server Engineer",
+      "bio": "Backend"
+    }
+  ],
+  "payrolls": [
+    {
+      "id": "1",
+      "name": "Dec 2025 Payroll",
+      "date": "2025-12-01",
+      "status": "Processed"
+    },
+    {
+      "id": "2",
+      "name": "Nov 2025 Payroll",
+      "date": "2025-11-01",
+      "status": "Processed"
+    }
+  ],
+  "attendance": [
+    {
+      "id": "1",
+      "userId": 3,
+      "action": "in",
+      "time": "2025-12-10T09:00:00Z"
+    },
+    {
+      "id": "c509",
+      "userId": "1",
+      "action": "in",
+      "time": "2025-12-11T10:42:26.427Z"
+    },
+    {
+      "id": "ef5b",
+      "userId": "1",
+      "action": "in",
+      "time": "2025-12-11T10:42:28.061Z"
+    },
+    {
+      "id": "596c",
+      "userId": "1",
+      "action": "in",
+      "time": "2025-12-11T10:42:35.485Z"
+    },
+    {
+      "id": "37d9",
+      "userId": "1",
+      "action": "in",
+      "time": "2025-12-11T10:42:36.193Z"
+    },
+    {
+      "id": "719e",
+      "userId": "1",
+      "action": "in",
+      "time": "2025-12-11T10:42:36.421Z"
+    },
+    {
+      "id": "4c3c",
+      "userId": "1",
+      "action": "in",
+      "time": "2025-12-11T10:42:36.605Z"
+    },
+    {
+      "id": "0955",
+      "userId": "1",
+      "action": "in",
+      "time": "2025-12-11T10:42:36.831Z"
+    }
+  ]
+}
