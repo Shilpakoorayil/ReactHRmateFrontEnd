@@ -1,10 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
 import MiniChart from '../components/MiniChart'
 import Donut from '../components/Donut'
 import CalendarComp from '../components/Calendar'
 import { AuthContext } from '../context/AuthContext'
+import AttandanceChart from "../components/AttandanceChart";
+
+
+
 import {
   Chart as ChartJS,
   ArcElement,
@@ -14,18 +18,44 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-
 export default function Dashboard(){
   const { user } = useContext(AuthContext)
+
+  // ⭐ NEW — store employees
+  const [employees, setEmployees] = useState([]);
+
+  // ⭐ Fetch employees from backend
+  useEffect(() => {
+    loadEmployees();
+  }, []);
+
+  const loadEmployees = () => {
+    fetch("http://localhost:5500/employees")
+      .then(res => res.json())
+      .then(data => setEmployees(data))
+      .catch(err => console.log("Error loading employees:", err));
+  };
+
+  // ⭐ Dynamic counts
+  const totalEmployees = employees.length;
+  const newEmployees = employees.filter(e => e.isNew).length;
+  const resignedEmployees = employees.filter(e => e.resigned).length;
+  // Attandance
+const presentCount = employees.filter(e => e.status === "Present").length;
+const absentCount = employees.filter(e => e.status === "Absent").length;
+
   return (
     <div className='app'>
       <Sidebar />
       <div className='main'>
         <Topbar />
+
         <section className='dashboard'>
           <div className='hero'>
             <div>
-              <p className='greet'>Good Morning{user? ', '+user.email : ''}!</p>
+              <p className='greet'>
+                Good Morning{user ? ', ' + user.email : ''}!
+              </p>
               <h1>Employee Overview</h1>
             </div>
             <div className='hero-actions'>
@@ -34,29 +64,96 @@ export default function Dashboard(){
             </div>
           </div>
 
+          {/* ⭐ DYNAMIC CARDS */}
           <div className='cards-row'>
-            <div className='card stat'><div className='icon'>👥</div><div className='value'>1,450 <span className='muted'>+5.15%</span></div><div className='label'>Total Employees</div></div>
-            <div className='card stat'><div className='icon'>🧾</div><div className='value'>950 <span className='muted'>+2.05%</span></div><div className='label'>Job Applicants</div></div>
-            <div className='card stat'><div className='icon'>➕</div><div className='value'>856 <span className='muted red'>-5.15%</span></div><div className='label'>New Employees</div></div>
-            <div className='card stat'><div className='icon'>↩️</div><div className='value'>450 <span className='muted'>-2.25%</span></div><div className='label'>Resigned Employees</div></div>
+            
+            {/* TOTAL EMPLOYEES */}
+            <div className='card stat'>
+              <div className='icon'>👥</div>
+              <div className='value'>
+                {totalEmployees}
+                <span className='muted'>+5.15%</span>
+              </div>
+              <div className='label'>Total Employees</div>
+            </div>
+
+            {/* JOB APPLICANTS - still static */}
+            <div className='card stat'>
+              <div className='icon'>🧾</div>
+              <div className='value'>
+                950 <span className='muted'>+2.05%</span>
+              </div>
+              <div className='label'>Job Applicants</div>
+            </div>
+
+            {/* NEW EMPLOYEES */}
+            <div className='card stat'>
+              <div className='icon'>➕</div>
+              <div className='value'>
+                {newEmployees}
+                <span className='muted red'>-5.15%</span>
+              </div>
+              <div className='label'>New Employees</div>
+            </div>
+
+            {/* RESIGNED EMPLOYEES */}
+            <div className='card stat'>
+              <div className='icon'>↩️</div>
+              <div className='value'>
+                {resignedEmployees}
+                <span className='muted'>-2.25%</span>
+              </div>
+              <div className='label'>Resigned Employees</div>
+            </div>
+
           </div>
 
           <div className='main-grid'>
             <div className='panel large'>
-              <div className='panel-header'><h3>Employee Performance</h3><button className='link'>View Details</button></div>
+              <div className='panel-header'>
+                <h3>Employee Performance</h3>
+                <button className='link'>View Details</button>
+              </div>
               <MiniChart />
             </div>
+            <div className="panel right">
+  <AttandanceChart
+    present={presentCount}
+    absent={absentCount}
+  />
+</div>
+
 
             <div className='panel right'><Donut /></div>
 
-            <div className='panel calendar'><h3>Upcoming Schedules</h3><CalendarComp /></div>
+            <div className='panel calendar'>
+              <h3>Upcoming Schedules</h3>
+              <CalendarComp />
+            </div>
 
-            <div className='panel list'><h3>Employee List</h3><ul className='elist'>
-              <li><img src='https://i.pravatar.cc/40?img=1' alt='' /><div><strong>Sophia</strong><div className='small'>Product Manager</div></div></li>
-              <li><img src='https://i.pravatar.cc/40?img=2' alt='' /><div><strong>Mason</strong><div className='small'>Product Designer</div></div></li>
-              <li><img src='https://i.pravatar.cc/40?img=3' alt='' /><div><strong>Emily</strong><div className='small'>Product Manager</div></div></li>
-              <li><img src='https://i.pravatar.cc/40?img=4' alt='' /><div><strong>Daniel</strong><div className='small'>Server Engineer</div></div></li>
-            </ul></div>
+         {/* ..............................Employee lists....................................... */}
+<div className='panel list'>
+  <h3>Employee List</h3>
+
+  <ul className='elist'>
+    {employees.length === 0 && <p>No employees found.</p>}
+
+    {employees.map(emp => (
+      <li key={emp.id}>
+        <img
+          src={emp.image ? emp.image : `https://i.pravatar.cc/40?u=${emp.email}`}
+          alt={emp.name}
+        />
+        <div>
+          <strong>{emp.name}</strong>
+          <div className='small'>{emp.role}</div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
+
           </div>
         </section>
       </div>

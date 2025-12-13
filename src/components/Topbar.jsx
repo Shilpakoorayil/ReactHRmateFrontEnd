@@ -9,7 +9,7 @@ export default function Topbar(){
   },[dark])
   return (
     <header className='topbar'>
-      <div className='left'>HRMate Advanced</div>
+      <div className='left'>HRMate </div>
       <div className='right'>
         {user ? <><span className='muted'>{user.email}</span><button className='btn' onClick={logout}>Logout</button></> : null}
       </div>

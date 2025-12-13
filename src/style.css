@@ -35,3 +35,398 @@ input, select{width:100%;padding:10px;margin:8px 0;border:1px solid #e6e9ef;bord
 .table th,.table td{padding:8px;border-bottom:1px solid rgba(0,0,0,0.06)}
 .muted{color:#6b7280;margin-left:6px;font-size:12px}
 .elist li{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+/* ..................Dashboard Calender........................ */
+.dashboard-calendar {
+  border: none;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.react-calendar {
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  font-weight: bold;
+  padding: 6px;
+}
+
+.react-calendar__tile--active {
+  background: #007bff !important;
+  color: white !important;
+  border-radius: 6px;
+}
+/* .........Dashboard css */
+.event-day {
+  background: #ffefd5 !important;
+  border-radius: 50%;
+}
+
+.dashboard-calendar {
+  border: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.date-events {
+  margin-top: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.event-item {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.badge {
+  margin-left: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+/* Badge colors */
+.badge.meeting { background: #007bff; }
+.badge.leave { background: #ff9800; }
+.badge.joining { background: #4caf50; }
+.badge.birthday { background: #e91e63; }
+
+.no-event {
+  color: #888;
+  font-size: 14px;
+}
+/* .............silde bar................................. */
+/* =====================================================
+   SIDEBAR BASE STYLE
+===================================================== */
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  min-height: 100vh;
+  padding: 20px 15px;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====================== USER BOX ============================ */
+.sidebar-user {
+  background: #f7f7f7;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 25px;
+  border: 1px solid #ddd;
+}
+
+.sidebar-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.sidebar-user-info {
+  margin-top: 10px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.info-item .icon {
+  font-size: 16px;
+  color: #4a4a4a;
+}
+
+.tooltip {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Team link always blue */
+.info-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+.info-item a:hover {
+  text-decoration: underline;
+}
+
+/* ====================== MENU ============================ */
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.sidebar-menu li {
+  margin-bottom: 12px;
+}
+
+.sidebar-menu li a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: transparent;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.sidebar-menu li a:hover {
+  background: #e8f0fe;
+  color: #1a73e8;
+}
+
+/* ====================== DARK MODE ============================ */
+
+.dark-mode .sidebar {
+  background: #1f1f23;
+  border-right: 1px solid #333;
+}
+
+/* USER BOX */
+.dark-mode .sidebar-user {
+  background: #2a2a2f;
+  border: 1px solid #444;
+}
+
+.dark-mode .info-item .icon {
+  color: #e4e4e4;
+}
+
+.dark-mode .tooltip {
+  color: #ffffff;
+}
+
+.dark-mode .info-item a {
+  color: #4da3ff;
+}
+
+/* MENU */
+.dark-mode .sidebar-menu li a {
+  color: #e4e4e4;
+}
+
+.dark-mode .sidebar-menu li a:hover {
+  background: #33343a;
+  color: #4da3ff;
+}
+
+/* Avatar border effect */
+.dark-mode .sidebar-avatar {
+  border: 2px solid #555;
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 4px;
+}
+
+.dark-mode .sidebar::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+/* ........................Team............. */
+
+.teams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  background: #4A90E2;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* background: #fff; */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.team-table th {
+  background: #4A90E2;
+  color: rgb(235, 233, 233);
+  padding: 12px;
+  cursor: pointer;
+}
+
+.team-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.team-table tr:hover {
+  background: #a7bfdb;
+  cursor: pointer;
+}
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-cell img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+/* ...............EMPLOYEEE SECTION */
+/* SEARCH INPUT */
+.search-input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  cursor: pointer;
+}
+
+/* TABLE */
+.employee-table th {
+  background: #4A90E2;
+  color: #fff;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.employee-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+/* DEPARTMENT BADGE */
+.dept-badge {
+  background: #2563eb;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ACTION BUTTONS */
+.edit-link {
+  color: #1d4ed8;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #e11d48;
+  cursor: pointer;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* PAGINATION */
+.pagination {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.page-btn {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  background: #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #000;
+  cursor: pointer;
+}
+
+.page-btn.active {
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+/* ...........................Edit Employeee.......................*/
+/* Normal dropdown */
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #6992e2;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* When dropdown is clicked / opened */
+select:focus {
+  border-color: #4f46e5;      /* blue border */
+  background-color: #425baf;  /* light blue background */
+  outline: none;
+}
+
+/* Optional: hover effect */
+select:hover {
+  border-color: #6366f1;
+}
+
+/* ............Attendances................... */
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.status.present {
+  background-color: #e6f9f0;
+  color: #0a8f5b;
+}
+
+.status.absent {
+  background-color: #fdecea;
+  color: #d93025;
+}
+
+/* ............................................................ */

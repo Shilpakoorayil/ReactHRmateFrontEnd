@@ -1,23 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import Sidebar from '../components/Sidebar'
-import Topbar from '../components/Topbar'
+import React, { useEffect, useState } from "react";
+import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar";
 
-export default function Payroll(){
-  const [runs, setRuns] = useState([])
-  useEffect(()=>{ fetch('http://localhost:5500/payrolls').then(r=>r.json()).then(setRuns).catch(()=>{}) },[])
+export default function Payroll() {
+  const [payroll, setPayroll] = useState([]);
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const p = await fetch("http://localhost:5500/payroll").then(r => r.json());
+    const e = await fetch("http://localhost:5500/employees").then(r => r.json());
+    setPayroll(p);
+    setEmployees(e);
+  };
+
+  const getEmployeeName = (id) => {
+    const emp = employees.find(e => Number(e.id) === Number(id));
+    return emp ? emp.name : "Unknown";
+  };
+
   return (
-    <div className='app'>
-      <Sidebar/>
-      <div className='main'>
-        <Topbar/>
-        <div className='card'>
-          <h3>Payroll Runs</h3>
-          <table className='table'>
-            <thead><tr><th>Run</th><th>Date</th><th>Status</th></tr></thead>
-            <tbody>{runs.map(r=> <tr key={r.id}><td>{r.name}</td><td>{r.date}</td><td>{r.status}</td></tr>)}</tbody>
+    <div className="app">
+      <Sidebar />
+      <div className="main">
+        <Topbar />
+
+        <div className="card">
+          <h3>Payroll</h3>
+
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Month</th>
+                <th>Basic</th>
+                <th>HRA</th>
+                <th>Deductions</th>
+                <th>Net Salary</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {payroll.map(p => (
+                <tr key={p.id}>
+                  <td>{getEmployeeName(p.employeeId)}</td>
+                  <td>{p.month} {p.year}</td>
+                  <td>₹{p.basic}</td>
+                  <td>₹{p.hra}</td>
+                  <td>₹{p.deductions}</td>
+                  <td><strong>₹{p.netSalary}</strong></td>
+                  <td>
+                    <span className={`status ${p.status === "Paid" ? "present" : "absent"}`}>
+                      {p.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+
           </table>
         </div>
       </div>
     </div>
-  )
+  );
 }

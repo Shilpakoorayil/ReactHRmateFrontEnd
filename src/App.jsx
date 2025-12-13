@@ -11,6 +11,7 @@ import Payroll from './pages/Payroll'
 import Attendance from './pages/Attendance'
 import EmployeeProfile from './pages/EmployeeProfile'
 import Settings from './pages/Settings'
+import Teams from './pages/Teams'  
 
 function PrivateRoute({ children, roles }){
   const { user } = useContext(AuthContext)
@@ -27,12 +28,21 @@ export default function App(){
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/dashboard' element={<PrivateRoute><Dashboard/></PrivateRoute>}/>
-          <Route path='/employees' element={<PrivateRoute roles={['admin','manager']}><Employees/></PrivateRoute>}/>
+          <Route path='/employees' element={<PrivateRoute roles={['admin','hr']}><Employees/></PrivateRoute>}/>
           <Route path='/add-employee' element={<PrivateRoute roles={['admin']}><AddEmployee/></PrivateRoute>}/>
-          <Route path='/edit-employee/:id' element={<PrivateRoute roles={['admin','manager']}><EditEmployee/></PrivateRoute>}/>
+          <Route path='/edit-employee/:id' element={<PrivateRoute roles={['admin','hr']}><EditEmployee/></PrivateRoute>}/>
           <Route path='/payroll' element={<PrivateRoute roles={['admin']}><Payroll/></PrivateRoute>}/>
           <Route path='/attendance' element={<PrivateRoute><Attendance/></PrivateRoute>}/>
           <Route path='/employee/:id' element={<PrivateRoute><EmployeeProfile/></PrivateRoute>}/>
+
+          <Route 
+            path='/teams' 
+            element={
+              <PrivateRoute roles={['admin','hr']}>
+                <Teams/>
+              </PrivateRoute>
+            }
+          />
           <Route path='/settings' element={<PrivateRoute roles={['admin']}><Settings/></PrivateRoute>}/>
           <Route path='/' element={<Navigate to='/dashboard'/>}/>
         </Routes>

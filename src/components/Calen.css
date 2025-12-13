@@ -1,0 +1,47 @@
+.event-day {
+  background: #ffefd5 !important;
+  border-radius: 50%;
+}
+
+.dashboard-calendar {
+  border: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.date-events {
+  margin-top: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.event-item {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.badge {
+  margin-left: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+/* Badge colors */
+.badge.meeting { background: #007bff; }
+.badge.leave { background: #ff9800; }
+.badge.joining { background: #4caf50; }
+.badge.birthday { background: #e91e63; }
+
+.no-event {
+  color: #888;
+  font-size: 14px;
+}
