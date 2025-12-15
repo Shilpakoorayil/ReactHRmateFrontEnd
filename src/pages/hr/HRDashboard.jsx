@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../style.css";
-import Sidebar from "../components/admin/Sidebar";
-import Topbar from "../components/admin/Topbar";
+import Sidebar from "../../components/admin/Sidebar";
+import Topbar from "../../components/admin/Topbar";
 
-
-export default function Attendance() {
+export default function HRDashboard() {
   const [attendance, setAttendance] = useState([]);
   const [employees, setEmployees] = useState([]);
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Sidebar from '../components/Sidebar';
-import Topbar from '../components/Topbar';
-import '../style.css';
+import "../style.css";
+import Sidebar from "../components/admin/Sidebar";
+import Topbar from "../components/admin/Topbar";
+
 
 export default function AddEmployee() {
 

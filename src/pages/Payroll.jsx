@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+
+import Topbar from "../components/admin/Topbar";
+import Sidebar from "../components/admin/Sidebar";
 
 export default function Payroll() {
   const [payroll, setPayroll] = useState([]);
@@ -24,7 +25,7 @@ export default function Payroll() {
 
   return (
     <div className="app">
-      <Sidebar />
+      <Sidebar/>
       <div className="main">
         <Topbar />
 

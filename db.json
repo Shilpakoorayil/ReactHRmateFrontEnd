@@ -32,14 +32,14 @@
       "joinDate": "2023-03-10",
       "status": "Active",
       "role": "employee",
-    "employeeId": 2
+    "employeeId": 1
   }
 
 
   ],
   "employees": [
     {
-      "id": "2",
+      "id": "1",
       "name": "John Doe",
       "email": "john@gmail.com",
       "password": "john123",
@@ -52,7 +52,7 @@
       "role": "employee"
     },
     {
-      "id": "3",
+      "id": "2",
       "name": "Maria Silva",
       "email": "maria@example.com",
       "phone": "912345639",
@@ -63,7 +63,7 @@
       "status": "Active"
     },
     {
-      "id": "4",
+      "id": "3",
       "name": "Ria Silva",
       "email": "maria@example.com",
       "phone": "9123456729",
@@ -74,7 +74,7 @@
       "status": "Active"
     },
     {
-      "id": "5",
+      "id": "4",
       "name": "Sumisha Sunder",
       "email": "maria@example.com",
       "phone": "9123456789",
@@ -85,7 +85,7 @@
       "status": "Active"
     },
     {
-      "id": "6",
+      "id": "5",
       "name": "Ashith",
       "email": "ashi@gmail.com",
       "designation": "Manager",
@@ -94,7 +94,7 @@
       "resigned": false
     },
     {
-      "id": "7",
+      "id": "6",
       "name": "Nainika",
       "email": "nainu@gmail.com",
       "designation": "Tester",
@@ -103,7 +103,7 @@
       "resigned": false
     },
     {
-      "id": "8",
+      "id": "7",
       "name": "Shabna",
       "email": "shabu@gmail.com",
       "designation": "Software Engineer",

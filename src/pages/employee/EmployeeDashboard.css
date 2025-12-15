@@ -1,0 +1,39 @@
+/* PAGE CENTERING */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f6fa;
+}
+
+/* SINGLE CARD */
+.employee-card {
+  background: #ffffff;
+  width: 320px;
+  padding: 25px;
+  border-radius: 12px; /* soft square */
+  text-align: center;
+  border: 1px solid #e0e0e0;
+}
+
+/* PROFILE IMAGE */
+.employee-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+/* TEXT */
+.employee-card h3 {
+  margin: 10px 0 5px;
+  font-size: 20px;
+  color: #170cf0;
+}
+
+.employee-card p {
+  font-size: 14px;
+  color: #666;
+  margin: 6px 0;
+}

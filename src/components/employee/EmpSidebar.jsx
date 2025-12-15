@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
+
 import { FaUser, FaEnvelope, FaPhone, FaUsers } from "react-icons/fa";
-import '../style.css';
+import '../../../src/style.css';
 
 
 
-export default function Sidebar() {
+export default function EmpSidebar() {
   const { user } = useContext(AuthContext);
 
   return (
@@ -60,12 +61,12 @@ export default function Sidebar() {
 
       {/*  MENU ITEMS */}
      <ul className="sidebar-menu">
-  <li><Link to="/dashboard">Dashboard</Link></li>
+  <li><Link to="/employeedashboard">Dashboard</Link></li>
   <li><Link to="/employees">Employees</Link></li>
   <li><Link to="/attendance">Attendance</Link></li>
   <li><Link to="/payroll">Payroll</Link></li>
   
-  <li><Link to="/settings">Settings</Link></li>
+  <li><Link to="/empsettings">Settings</Link></li>
 </ul>
 
 

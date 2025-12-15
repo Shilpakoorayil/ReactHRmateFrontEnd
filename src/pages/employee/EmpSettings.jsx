@@ -1,16 +1,18 @@
 import React, { useContext } from 'react'
-import "../style.css";
-import Sidebar from "../components/admin/Sidebar";
-import Topbar from "../components/admin/Topbar";
-import { AuthContext } from "../context/AuthContext";
 
-export default function Settings(){
+import { AuthContext } from "../../context/AuthContext";
+
+import Topbar from '../../components/admin/Topbar';
+import EmpSidebar from '../../components/employee/empSidebar';
+
+
+export default function EmpSettings(){
   const { dark, toggleDark } = useContext(AuthContext)
   return (
     <div className='app'>
-      <Sidebar/>
+      <EmpSidebar/>
       <div className='main'>
-        <Topbar/>
+     <Topbar/>
         <div className='card'>
           <h3>Settings</h3>
           <div style={{display:'flex',gap:12,alignItems:'center'}}>

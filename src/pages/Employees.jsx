@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+
+import Topbar from "../components/admin/Topbar";
 import { Link } from "react-router-dom";
 import { getEmployees, deleteEmployee } from "../api/employeesApi";
 import '../style.css';
+import Sidebar from "../components/admin/Sidebar";
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
@@ -16,7 +17,9 @@ export default function Employees() {
   }, []);
 
   async function loadEmployees() {
+    
     const data = await getEmployees();
+
     setEmployees(data);
   }
 
@@ -39,7 +42,7 @@ export default function Employees() {
 
   return (
     <div className="app">
-      <Sidebar />
+      <Sidebar/>
       <div className="main">
         <Topbar />
 

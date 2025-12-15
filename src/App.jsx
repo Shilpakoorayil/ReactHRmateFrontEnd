@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, AuthContext } from './context/AuthContext'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Dashboard from './pages/Dashboard'
+
 import Employees from './pages/Employees'
 import AddEmployee from './pages/AddEmployee'
 import EditEmployee from './pages/EditEmployee'
@@ -11,7 +11,13 @@ import Payroll from './pages/Payroll'
 import Attendance from './pages/Attendance'
 import EmployeeProfile from './pages/EmployeeProfile'
 import Settings from './pages/Settings'
-import Teams from './pages/Teams'  
+import Teams from './pages/Teams' 
+
+import Dashboard from './pages/admin/Dashboard'
+import HRDashboard from './pages/hr/HRDashboard'
+import EmployeeDashboard from './pages/employee/EmployeeDashboard'
+import EmpSettings from './pages/employee/empSettings'
+
 
 function PrivateRoute({ children, roles }){
   const { user } = useContext(AuthContext)
@@ -27,7 +33,7 @@ export default function App(){
         <Routes>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
-          <Route path='/dashboard' element={<PrivateRoute><Dashboard/></PrivateRoute>}/>
+          {/* <Route path='/dashboard' element={<PrivateRoute><Dashboard/></PrivateRoute>}/> */}
           <Route path='/employees' element={<PrivateRoute roles={['admin','hr']}><Employees/></PrivateRoute>}/>
           <Route path='/add-employee' element={<PrivateRoute roles={['admin']}><AddEmployee/></PrivateRoute>}/>
           <Route path='/edit-employee/:id' element={<PrivateRoute roles={['admin','hr']}><EditEmployee/></PrivateRoute>}/>
@@ -41,10 +47,43 @@ export default function App(){
               <PrivateRoute roles={['admin','hr']}>
                 <Teams/>
               </PrivateRoute>
-            }
+            }  
+
           />
-          <Route path='/settings' element={<PrivateRoute roles={['admin']}><Settings/></PrivateRoute>}/>
-          <Route path='/' element={<Navigate to='/dashboard'/>}/>
+          <Route
+  path="/admin/dashboard"
+  element={
+    <PrivateRoute roles={['admin']}>
+      <Dashboard />
+    </PrivateRoute>
+  }
+/>
+
+<Route
+  path="/hr/hrdashboard"
+  element={
+    <PrivateRoute roles={['hr']}>
+      <HRDashboard />
+      <Settings/>
+    </PrivateRoute>
+  }
+/>
+
+<Route
+  path="/employee/employeedashboard"
+  element={
+    <PrivateRoute roles={['employee']}>
+      <EmployeeDashboard />
+      <EmpSettings/>
+    </PrivateRoute>
+  }
+/>
+
+          <Route path='/settings' element={<PrivateRoute roles={['admin','hr']}><Settings/></PrivateRoute>}/>
+           <Route path='/empsettings' element={<PrivateRoute roles={['employee']}><EmpSettings/></PrivateRoute>}/>
+            <Route path='/employeedashboard' element={<PrivateRoute roles={['employee']}><EmployeeDashboard/></PrivateRoute>}/>
+           
+          <Route path='/' element={<Navigate to='/login'/>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

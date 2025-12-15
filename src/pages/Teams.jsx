@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+
+
+
+import "../style.css";
+import Sidebar from "../components/admin/Sidebar";
+import Topbar from "../components/admin/Topbar";
 import { AuthContext } from "../context/AuthContext";
-import '../style.css';
 
 export default function Teams() {
   const { user } = useContext(AuthContext);
@@ -17,7 +20,7 @@ export default function Teams() {
 
     let url = "http://localhost:5500/employees";
 
-    // HR sees only their own department
+    // HR sees only their department
     if (user.role === "hr") {
       url = `http://localhost:5500/employees?department=${user.department}`;
     }
@@ -27,48 +30,42 @@ export default function Teams() {
       .then((data) => {
         setEmployees(data);
         setFilteredEmployees(data);
-        setLoading(false);
-
-        // Extract unique departments
-        const deptList = [...new Set(data.map((e) => e.department))];
-        setDepartments(deptList);
-      });
+        setDepartments([...new Set(data.map((e) => e.department))]);
+      })
+      .catch((err) => console.error("Error loading teams:", err))
+      .finally(() => setLoading(false));
   }, [user]);
 
-  // ⭐ FILTER HANDLER
   const handleFilter = (dept) => {
     setSelectedDept(dept);
-
-    if (dept === "all") {
-      setFilteredEmployees(employees);
-    } else {
-      setFilteredEmployees(employees.filter((e) => e.department === dept));
-    }
+    setFilteredEmployees(
+      dept === "all"
+        ? employees
+        : employees.filter((e) => e.department === dept)
+    );
   };
 
   return (
     <div className="app">
-      <Sidebar />
+      <Sidebar/>
       <div className="main">
         <Topbar />
 
         <section className="teams-page">
-
           <div className="teams-header">
             <h1 className="page-title">
               Team Members ({filteredEmployees.length})
             </h1>
 
-            {/* ⭐ FILTER DROPDOWN */}
-            {user.role === "admin" && (
+            {user?.role === "admin" && (
               <select
                 className="filter-select"
                 value={selectedDept}
                 onChange={(e) => handleFilter(e.target.value)}
               >
                 <option value="all">All Departments</option>
-                {departments.map((dept, index) => (
-                  <option key={index} value={dept}>
+                {departments.map((dept, i) => (
+                  <option key={i} value={dept}>
                     {dept}
                   </option>
                 ))}
@@ -88,12 +85,10 @@ export default function Teams() {
                 <tr>
                   <th>Employee</th>
                   <th>Email</th>
-                  {/* <th>Phone</th> */}
                   <th>Department</th>
                   <th>Designation</th>
                 </tr>
               </thead>
-
               <tbody>
                 {filteredEmployees.map((emp) => (
                   <tr key={emp.id}>
@@ -101,9 +96,8 @@ export default function Teams() {
                       <div className="user-cell">
                         <img
                           src={
-                            emp.image
-                              ? emp.image
-                              : `https://i.pravatar.cc/40?u=${emp.email}`
+                            emp.image ||
+                            `https://i.pravatar.cc/40?u=${emp.email}`
                           }
                           alt={emp.name}
                         />
@@ -111,7 +105,6 @@ export default function Teams() {
                       </div>
                     </td>
                     <td>{emp.email}</td>
-                    {/* <td>{emp.phone}</td> */}
                     <td>{emp.department}</td>
                     <td>{emp.designation}</td>
                   </tr>

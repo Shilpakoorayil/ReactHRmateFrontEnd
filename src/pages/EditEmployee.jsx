@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+import Sidebar from "../components/admin/Sidebar";
+import Topbar from "../components/admin/Topbar";
 import { updateEmployee, getEmployees } from "../api/employeesApi";
 import { useParams, useNavigate } from "react-router-dom";
 import '../style.css';

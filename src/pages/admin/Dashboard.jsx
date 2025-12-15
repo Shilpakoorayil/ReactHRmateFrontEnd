@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Sidebar from '../components/Sidebar'
-import Topbar from '../components/Topbar'
-import MiniChart from '../components/MiniChart'
-import Donut from '../components/Donut'
-import CalendarComp from '../components/Calendar'
-import { AuthContext } from '../context/AuthContext'
-import AttandanceChart from "../components/AttandanceChart";
+import Sidebar from '../../components/admin/Sidebar'
+import Topbar from '../../components/admin//Topbar'
+import MiniChart from '../../components/admin/MiniChart'
+import Donut from '../../components/admin/Donut'
+import CalendarComp from '../../components/admin/Calendar'
+import { AuthContext } from '../../context/AuthContext'
+import AttandanceChart from "../../components/admin/AttandanceChart";
 
 
 
