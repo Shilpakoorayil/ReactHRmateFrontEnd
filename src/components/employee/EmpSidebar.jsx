@@ -43,13 +43,13 @@ export default function EmpSidebar() {
   </div>
 
   {/* TEAM */}
- <div className="info-item">
+ {/* <div className="info-item">
    <Link to="/teams">
   <FaUsers className="icon" />
  
     <span className="tooltip">{user?.team || user?.department || "Team"}</span>
   </Link>
-</div>
+</div> */}
 
 
 </div>
@@ -62,10 +62,9 @@ export default function EmpSidebar() {
       {/*  MENU ITEMS */}
      <ul className="sidebar-menu">
   <li><Link to="/employeedashboard">Dashboard</Link></li>
-  <li><Link to="/employees">Employees</Link></li>
-  <li><Link to="/attendance">Attendance</Link></li>
-  <li><Link to="/payroll">Payroll</Link></li>
-  
+   <li> <Link to="/apply-leave">Apply Leave</Link></li>
+  <li><Link to="/my-attendance">My Attendance</Link></li>
+  <li><Link to="/my-payroll">My Payroll</Link></li>
   <li><Link to="/empsettings">Settings</Link></li>
 </ul>
 

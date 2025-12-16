@@ -5,10 +5,21 @@ import Topbar from "../components/admin/Topbar";
 
 
 export default function Attendance() {
+  //To get attendance and employee name
   const [attendance, setAttendance] = useState([]);
   const [employees, setEmployees] = useState([]);
-
+  //For Emp name and Month Sorting
+  const [selectedEmployee, setSelectedEmployee] = useState("all");
+  const [selectedMonth, setSelectedMonth] = useState("all");
+ 
+///page
+  const [currentPage, setCurrentPage] = useState(1);
+const rowsPerPage = 5; // you can change to 10
   const today = new Date().toISOString().slice(0, 10);
+
+
+
+
 
   useEffect(() => {
     loadData();
@@ -23,18 +34,45 @@ export default function Attendance() {
 
 
 
- const getEmployeeName = (id) => {
-  const emp = employees.find(e => Number(e.id) === Number(id));
-  if (!emp) {
-    console.warn("Employee not found for ID:", id);
-    return "Invalid Employee";
-  }
-  return emp.name;
-};
+  const getEmployeeName = (id) => {
+    const emp = employees.find(e => Number(e.id) === Number(id));
+    if (!emp) {
+      console.warn("Employee not found for ID:", id);
+      return "Invalid Employee";
+    }
+    return emp.name;
+  };
+  // Filter .............................................................
+const filteredAttendance = attendance.filter(a => {
+  const empMatch =
+    selectedEmployee === "all" ||
+    String(a.employeeId) === selectedEmployee;
+
+  const monthMatch =
+    selectedMonth === "all" ||
+    a.date.slice(0, 7) === selectedMonth;
+
+  return empMatch && monthMatch;
+});
+
+const indexOfLastRow = currentPage * rowsPerPage;
+const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+
+const paginatedAttendance = filteredAttendance.slice(
+  indexOfFirstRow,
+  indexOfLastRow
+);
+
+const totalPages = Math.ceil(filteredAttendance.length / rowsPerPage);
+useEffect(() => {
+  setCurrentPage(1);
+}, [selectedEmployee, selectedMonth]);
+
+// .....................................................
 
 
 
-  // ✅ CHECK IN
+  // CHECK IN
   const checkIn = async (employeeId) => {
     const exists = attendance.find(
       a => a.employeeId === employeeId && a.date === today
@@ -45,13 +83,13 @@ export default function Attendance() {
       return;
     }
 
-   const payload = {
-  employeeId: Number(employeeId),
-  date: today,
-  status: "Present",
-  checkIn: new Date().toLocaleTimeString(),
-  checkOut: ""
-};
+    const payload = {
+      employeeId: Number(employeeId),
+      date: today,
+      status: "Present",
+      checkIn: new Date().toLocaleTimeString(),
+      checkOut: ""
+    };
 
 
     await fetch("http://localhost:5500/attendance", {
@@ -63,7 +101,7 @@ export default function Attendance() {
     loadData();
   };
 
- 
+
 
   return (
     <div className="app">
@@ -75,43 +113,113 @@ export default function Attendance() {
         {/* TOP BAR */}
         <Topbar />
         <div className="card">
-          <h3>Attendance</h3>
+          
+            <h3>Attendance</h3>
 
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Employee</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Action</th>
-              </tr>
-            </thead>
+          <div style={{ display: "flex", gap: "15px", marginBottom: "15px" }}>
 
-            <tbody>
-              {attendance.map(a => (
-                <tr key={a.id}>
-                  <td>{getEmployeeName(a.employeeId)}</td>
-                  <td>{a.date}</td>
-                  <td>{a.status}</td>
-                  <td>{a.checkIn || "-"}</td>
-                  <td>{a.checkOut || "-"}</td>
-                  <td>
-                    <span
-                      className={`status ${a.status === "Present" ? "present" : "absent"
-                        }`}
-                    >
-                      {a.status}
-                    </span>
-                  </td>
-
-                </tr>
+            {/* EMPLOYEE FILTER */}
+            <select
+              value={selectedEmployee}
+              onChange={(e) => setSelectedEmployee(e.target.value)}
+            >
+              <option value="all">All Employees</option>
+              {employees.map(emp => (
+                <option key={emp.id} value={emp.id}>
+                  {emp.name}
+                </option>
               ))}
-            </tbody>
-          </table>
+            </select>
 
-        
+            {/* MONTH FILTER */}
+            <select
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              <option value="all">All Months</option>
+              {[...new Set(attendance.map(a => a.date.slice(0, 7)))].map(month => (
+                <option key={month} value={month}>
+                  {month}
+                </option>
+              ))}
+            </select>
+
+          </div>
+
+          
+<table className="table">
+  {totalPages > 1 && (
+  <div className="pagination">
+    <button
+      disabled={currentPage === 1}
+      onClick={() => setCurrentPage(p => p - 1)}
+    >
+      ⬅ Prev
+    </button>
+
+    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+      <button
+        key={page}
+        className={page === currentPage ? "active" : ""}
+        onClick={() => setCurrentPage(page)}
+      >
+        {page}
+      </button>
+    ))}
+
+    <button
+      disabled={currentPage === totalPages}
+      onClick={() => setCurrentPage(p => p + 1)}
+    >
+      Next ➡
+    </button>
+  </div>
+)}
+
+  <thead>
+    <tr>
+      <th>Employee</th>
+      <th>Date</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+<tbody>
+  {paginatedAttendance.length === 0 ? (
+    <tr>
+      <td colSpan="5" style={{ textAlign: "center" }}>
+        No attendance records found
+      </td>
+    </tr>
+  ) : (
+    paginatedAttendance.map(a => (
+      <tr key={a.id}>
+        <td>{getEmployeeName(a.employeeId)}</td>
+        <td>{a.date}</td>
+        <td>{a.checkIn || "-"}</td>
+        <td>{a.checkOut || "-"}</td>
+        <td>
+          <span
+            className={`status ${
+              a.status === "Present" ? "present" : "absent"
+            }`}
+          >
+            {a.status}
+          </span>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
+
+</table>
+
+  
+
+
+
         </div>
       </div>
     </div>

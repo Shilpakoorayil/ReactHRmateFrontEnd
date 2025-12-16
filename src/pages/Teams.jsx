@@ -1,7 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-
-
-
 import "../style.css";
 import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
@@ -9,20 +6,21 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Teams() {
   const { user } = useContext(AuthContext);
+
   const [employees, setEmployees] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [selectedDept, setSelectedDept] = useState("all");
   const [loading, setLoading] = useState(true);
 
+  // 🔹 Load employees
   useEffect(() => {
     if (!user) return;
 
     let url = "http://localhost:5500/employees";
 
-    // HR sees only their department
     if (user.role === "hr") {
-      url = `http://localhost:5500/employees?department=${user.department}`;
+      url += `?department=${user.department}`;
     }
 
     fetch(url)
@@ -30,12 +28,15 @@ export default function Teams() {
       .then((data) => {
         setEmployees(data);
         setFilteredEmployees(data);
-        setDepartments([...new Set(data.map((e) => e.department))]);
+
+        const uniqueDepts = [...new Set(data.map((e) => e.department))];
+        setDepartments(uniqueDepts);
       })
       .catch((err) => console.error("Error loading teams:", err))
       .finally(() => setLoading(false));
   }, [user]);
 
+  // 🔹 Handle filter
   const handleFilter = (dept) => {
     setSelectedDept(dept);
     setFilteredEmployees(
@@ -47,7 +48,7 @@ export default function Teams() {
 
   return (
     <div className="app">
-      <Sidebar/>
+      <Sidebar />
       <div className="main">
         <Topbar />
 
@@ -58,18 +59,20 @@ export default function Teams() {
             </h1>
 
             {user?.role === "admin" && (
-              <select
-                className="filter-select"
-                value={selectedDept}
-                onChange={(e) => handleFilter(e.target.value)}
-              >
-                <option value="all">All Departments</option>
-                {departments.map((dept, i) => (
-                  <option key={i} value={dept}>
-                    {dept}
-                  </option>
-                ))}
-              </select>
+          <select
+  className="filter-select"
+  value={selectedDept}
+  onChange={(e) => handleFilter(e.target.value)}
+>
+  <option value="all">All Departments</option>
+  <option value="HR">HR</option>
+  <option value="IT">IT</option>
+  <option value="Finance">FINANCE</option>
+  <option value="Marketing">MARKETING</option> 
+  <option value="Operations">OPERATIONS</option>
+
+</select>
+
             )}
           </div>
 

@@ -6,36 +6,33 @@
       "email": "admin@hrmate.local",
       "password": "admin123",
       "role": "admin",
-       "department": "admin",
+      "department": "admin",
       "designation": "admin",
       "phone": 8281456106
     },
-  
-  {
-    "id": 2,
-     "name": "HR",
-    "email": "hr@hrmate.local",
-    "password": "hr123",
-    "role": "hr",
+    {
+      "id": "2",
+      "name": "HR",
+      "email": "hr@gmail.com",
+      "password": "hr123",
+      "role": "hr",
       "designation": "HR",
-    "department": "HR"
-  },
-  {
-     "id": "3",
+      "department": "HR"
+    },
+    {
+      "id": "3",
       "name": "John Doe",
       "email": "john@gmail.com",
       "password": "john123",
       "phone": 9876543210,
-      "department": "HR",
+      "department": "IT",
       "designation": "Employee",
       "salary": 45000,
       "joinDate": "2023-03-10",
       "status": "Active",
       "role": "employee",
-    "employeeId": 1
-  }
-
-
+      "employeeId": 1
+    }
   ],
   "employees": [
     {
@@ -44,7 +41,7 @@
       "email": "john@gmail.com",
       "password": "john123",
       "phone": "9876543210",
-      "department": "HR",
+      "department": "IT",
       "designation": "Employee",
       "salary": 45000,
       "joinDate": "2023-03-10",
@@ -79,7 +76,7 @@
       "email": "maria@example.com",
       "phone": "9123456789",
       "department": "Marketing",
-      "designation": "Software Engineer",
+      "designation": "Team Tead",
       "salary": 55000,
       "joinDate": "2022-11-05",
       "status": "Active"
@@ -89,7 +86,7 @@
       "name": "Ashith",
       "email": "ashi@gmail.com",
       "designation": "Manager",
-      "department": "IT",
+      "department": "HR",
       "isNew": true,
       "resigned": false
     },
@@ -98,7 +95,7 @@
       "name": "Nainika",
       "email": "nainu@gmail.com",
       "designation": "Tester",
-      "department": "IT",
+      "department": "Finance",
       "isNew": true,
       "resigned": false
     },
@@ -111,90 +108,310 @@
       "isNew": true,
       "resigned": false,
       "role": "m"
+    },
+    {
+      "id": "ce78",
+      "name": "sunaina",
+      "email": "sunu@gmail.com",
+      "designation": "Software Engineer",
+      "department": "HR",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "fb3e",
+      "name": "shabna",
+      "email": "shabu@gmai.com",
+      "designation": "Accountant",
+      "department": "HR",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "1908",
+      "name": "vindu",
+      "email": "vindu@gmail.com",
+      "designation": "Team Lead",
+      "department": "HR",
+      "isNew": true,
+      "resigned": false
     }
   ],
   "attendance": [
     {
-      "id": 201,
-      "employeeId": 2,
-      "date": "2025-12-10",
-      "status": "Present",
-      "checkIn": "09:15 AM",
-      "checkOut": "05:50 PM"
+      "id": 1,
+      "employeeId": 1,
+      "date": "2025-11-03",
+      "checkIn": "09:05",
+      "checkOut": "18:00",
+      "status": "Present"
     },
     {
-      "id": 202,
-      "employeeId": 3,
-      "date": "2025-12-10",
-      "status": "Present",
-      "checkIn": "09:00 AM",
-      "checkOut": "05:30 PM"
+      "id": 2,
+      "employeeId": 1,
+      "date": "2025-11-04",
+      "checkIn": "09:10",
+      "checkOut": "18:05",
+      "status": "Present"
     },
     {
-      "id": 203,
-      "employeeId": 4,
-      "date": "2025-12-10",
-      "status": "Absent",
+      "id": 3,
+      "employeeId": 1,
+      "date": "2025-11-05",
+      "checkIn": "09:00",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 4,
+      "employeeId": 1,
+      "date": "2025-11-06",
+      "checkIn": "09:12",
+      "checkOut": "18:10",
+      "status": "Present"
+    },
+    {
+      "id": 5,
+      "employeeId": 1,
+      "date": "2025-11-07",
+      "checkIn": "09:00",
+      "checkOut": "17:50",
+      "status": "Present"
+    },
+    {
+      "id": 6,
+      "employeeId": 1,
+      "date": "2025-11-10",
+      "checkIn": "09:08",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 7,
+      "employeeId": 1,
+      "date": "2025-11-11",
+      "checkIn": "09:00",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 8,
+      "employeeId": 1,
+      "date": "2025-11-12",
+      "checkIn": "09:20",
+      "checkOut": "18:15",
+      "status": "Present"
+    },
+    {
+      "id": 9,
+      "employeeId": 1,
+      "date": "2025-11-13",
+      "checkIn": "09:05",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 10,
+      "employeeId": 1,
+      "date": "2025-11-14",
+      "checkIn": "09:00",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 11,
+      "employeeId": 1,
+      "date": "2025-11-17",
+      "checkIn": "09:10",
+      "checkOut": "18:05",
+      "status": "Present"
+    },
+    {
+      "id": 12,
+      "employeeId": 1,
+      "date": "2025-11-18",
+      "checkIn": "09:00",
+      "checkOut": "17:55",
+      "status": "Present"
+    },
+    {
+      "id": 13,
+      "employeeId": 1,
+      "date": "2025-11-19",
+      "checkIn": "09:15",
+      "checkOut": "18:10",
+      "status": "Present"
+    },
+    {
+      "id": 14,
+      "employeeId": 1,
+      "date": "2025-11-20",
+      "checkIn": "09:05",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 15,
+      "employeeId": 1,
+      "date": "2025-11-21",
+      "checkIn": "09:00",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 16,
+      "employeeId": 1,
+      "date": "2025-11-24",
+      "checkIn": "09:10",
+      "checkOut": "18:05",
+      "status": "Present"
+    },
+    {
+      "id": 17,
+      "employeeId": 1,
+      "date": "2025-11-25",
+      "checkIn": "09:00",
+      "checkOut": "17:50",
+      "status": "Present"
+    },
+    {
+      "id": 18,
+      "employeeId": 1,
+      "date": "2025-11-26",
       "checkIn": "",
-      "checkOut": ""
+      "checkOut": "",
+      "status": "Absent"
     },
     {
-      "id": 204,
-      "employeeId": 5,
-      "date": "2025-12-10",
-      "status": "Present",
-      "checkIn": "09:20 AM",
-      "checkOut": "06:00 PM"
-    },
-    {
-      "id": 205,
-      "employeeId": 6,
-      "date": "2025-12-10",
-      "status": "Present",
-      "checkIn": "09:10 AM",
-      "checkOut": "05:45 PM"
-    },
-    {
-      "id": 206,
-      "employeeId": 7,
-      "date": "2025-12-10",
-      "status": "Absent",
+      "id": 19,
+      "employeeId": 1,
+      "date": "2025-11-27",
       "checkIn": "",
-      "checkOut": ""
+      "checkOut": "",
+      "status": "Abset"
     },
     {
-      "id": 207,
-      "employeeId": 8,
-      "date": "2025-12-10",
-      "status": "Present",
-      "checkIn": "08:55 AM",
-      "checkOut": "05:35 PM"
+      "id": 20,
+      "employeeId": 1,
+      "date": "2025-11-28",
+      "checkIn": "",
+      "checkOut": "",
+      "status": "Absent"
     },
     {
-      "id": "5d21",
-      "employeeId": 2,
+      "id": 21,
+      "employeeId": 1,
+      "date": "2025-12-01",
+      "checkIn": "09:05",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 22,
+      "employeeId": 1,
+      "date": "2025-12-02",
+      "checkIn": "09:10",
+      "checkOut": "18:05",
+      "status": "Present"
+    },
+    {
+      "id": 23,
+      "employeeId": 1,
+      "date": "2025-12-05",
+      "checkIn": "09:00",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 24,
+      "employeeId": 1,
+      "date": "2025-12-06",
+      "checkIn": "09:12",
+      "checkOut": "18:10",
+      "status": "Present"
+    },
+    {
+      "id": 25,
+      "employeeId": 1,
+      "date": "2025-12-07",
+      "checkIn": "09:00",
+      "checkOut": "17:50",
+      "status": "Present"
+    },
+    {
+      "id": 26,
+      "employeeId": 1,
+      "date": "2025-12-11",
+      "checkIn": "09:08",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 27,
+      "employeeId": 1,
+      "date": "2025-12-12",
+      "checkIn": "09:00",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 28,
+      "employeeId": 1,
       "date": "2025-12-13",
-      "status": "Present",
-      "checkIn": "9:00:19 PM",
-      "checkOut": ""
+      "checkIn": "09:20",
+      "checkOut": "18:15",
+      "status": "Present"
+    },
+    {
+      "id": 29,
+      "employeeId": 1,
+      "date": "2025-12-14",
+      "checkIn": "09:05",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 30,
+      "employeeId": 1,
+      "date": "2025-12-18",
+      "checkIn": "09:00",
+      "checkOut": "18:00",
+      "status": "Present"
+    },
+    {
+      "id": 31,
+      "employeeId": 1,
+      "date": "2025-12-19",
+      "checkIn": "09:10",
+      "checkOut": "18:05",
+      "status": "Present"
+    },
+    {
+      "id": 32,
+      "employeeId": 1,
+      "date": "2025-12-20",
+      "checkIn": "09:00",
+      "checkOut": "17:55",
+      "status": "Present"
     }
   ],
   "payroll": [
     {
-      "id": "1",
-      "employeeId": 2,
-      "month": "January",
+      "id": 1,
+      "employeeId": 1,
+      "name": "James",
+      "month": "November",
       "year": 2025,
-      "basic": 45000,
-      "hra": 10000,
+      "basic": 55000,
+      "hra": 12000,
       "deductions": 2000,
-      "netSalary": 53000,
-      "status": "Paid"
+      "netSalary": 64000,
+      "status": "Approved"
     },
     {
       "id": "2",
-      "employeeId": 3,
-      "month": "January",
+      "employeeId": 1,
+      "month": "December",
       "year": 2025,
       "basic": 55000,
       "hra": 12000,
@@ -253,6 +470,96 @@
       "from": "2025-01-03",
       "to": "2025-01-04",
       "type": "Casual Leave",
+      "status": "Pending"
+    },
+    {
+      "id": "b707",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2026-01-01",
+      "toDate": "2026-01-02",
+      "reason": "New year Celebration",
+      "status": "Pending"
+    },
+    {
+      "id": "9b50",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2025-12-16",
+      "toDate": "2025-12-16",
+      "reason": "Sick Leave",
+      "status": "Pending"
+    },
+    {
+      "id": "1293",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2025-12-31",
+      "toDate": "2025-12-30",
+      "reason": "a",
+      "status": "Pending"
+    },
+    {
+      "id": "bd36",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2025-12-25",
+      "toDate": "2025-12-29",
+      "reason": "test1",
+      "status": "Pending"
+    },
+    {
+      "id": "4d2f",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2026-01-09",
+      "toDate": "2026-01-10",
+      "reason": "test2",
+      "status": "Pending"
+    },
+    {
+      "id": "5f73",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2025-12-30",
+      "toDate": "2026-01-02",
+      "reason": "xassasa",
+      "status": "Pending"
+    },
+    {
+      "id": "1552",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2026-01-20",
+      "toDate": "2026-01-20",
+      "reason": "test4",
+      "status": "Pending"
+    },
+    {
+      "id": "3aef",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2026-01-01",
+      "toDate": "2026-01-01",
+      "reason": "33",
+      "status": "Pending"
+    },
+    {
+      "id": "3dd2",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2025-12-17",
+      "toDate": "2025-12-17",
+      "reason": "hello",
+      "status": "Pending"
+    },
+    {
+      "id": "b310",
+      "employeeId": "3",
+      "employeeName": "John Doe",
+      "fromDate": "2026-01-06",
+      "toDate": "2026-01-06",
+      "reason": "AaASa",
       "status": "Pending"
     }
   ]

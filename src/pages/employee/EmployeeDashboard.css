@@ -37,3 +37,27 @@
   color: #666;
   margin: 6px 0;
 }
+/* .............Leave.................. */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.dash-card {
+  padding: 20px;
+  border-radius: 14px;
+  color:black;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.pending { background: #ff9800; }
+.approved { background: #4caf50; }
+.rejected { background: #f44336; }
+
+.dash-card h3 {
+  font-size: 32px;
+  margin: 0;
+}
+/* ........................payroll....... */

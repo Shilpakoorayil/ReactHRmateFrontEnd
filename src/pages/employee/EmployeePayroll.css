@@ -1,0 +1,10 @@
+/* ........................payroll................. */
+.approved {
+  color: green;
+  font-weight: bold;
+}
+
+.pending {
+  color: rgb(240, 160, 12);
+  font-weight: bold;
+}
