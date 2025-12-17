@@ -20,16 +20,25 @@ export default function EmployeeDashboard() {
   }, [user]);
 
   // ........................................Leave Details................
+useEffect(() => {
+  if (!user) return;
 
-  useEffect(() => {
-    fetch(`http://localhost:5500/leaves?employeeId=${user.id}`)
-      .then(r => r.json())
-      .then(setLeaves);
-  }, [user.id]);
+  fetch(`http://localhost:5500/employeeId/${user.id}`)
+    .then(res => res.json())
+    .then(data => setEmployee(data));
+}, [user]);
 
-  const pending = leaves.filter(l => l.status === "Pending").length;
-  const approved = leaves.filter(l => l.status === "Approved").length;
-  const rejected = leaves.filter(l => l.status === "Rejected").length;
+useEffect(() => {
+  if (!user) return;
+
+  fetch(`http://localhost:5500/leaves?employeeId=${user.id}`)
+    .then(r => r.json())
+    .then(setLeaves);
+}, [user]);
+
+const pending = leaves.filter(l => l.status?.toLowerCase() === "pending").length;
+const approved = leaves.filter(l => l.status?.toLowerCase() === "approved").length;
+const rejected = leaves.filter(l => l.status?.toLowerCase() === "rejected").length;
 
 
   if (!employee) return <p>Loading...</p>;
@@ -40,10 +49,11 @@ export default function EmployeeDashboard() {
       <div className="main">
         <Topbar />
 
-        <h2>My Dashboard</h2>
+        
         {/* .......................Leave Details..................................... */}
         <div className="dashboard">
-          <h2>Welcome, {user.name}</h2>
+          <h2>Welcome Back , {user.name}</h2>
+          <h3>My Dashboard</h3>
 
           <div className="card-grid">
             <div className="dash-card pending">

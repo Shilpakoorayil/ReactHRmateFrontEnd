@@ -22,7 +22,7 @@ ChartJS.register(
 
 export default function MiniChart() {
   const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    labels: ["Jun", "Jul", "Aug", "Sept", "Oct", "Nov"],
     datasets: [
       {
         label: "Performance",

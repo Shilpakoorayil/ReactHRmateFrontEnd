@@ -14,8 +14,10 @@
 /* LEFT */
 .topbar .logo {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 1200px;
   letter-spacing: 0.5px;
+  margin-left: 50px;
+  font: bold;
 }
 
 /* RIGHT */

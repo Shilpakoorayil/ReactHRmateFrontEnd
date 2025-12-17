@@ -105,4 +105,18 @@
   font-size: 14px;
   text-align: center;
 }
+.error-msg {
+  display: block;
+  margin-bottom: 12px;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.success-msg {
+  margin-bottom: 12px;
+  color: #16a34a;
+  font-size: 14px;
+  font-weight: 500;
+}
 

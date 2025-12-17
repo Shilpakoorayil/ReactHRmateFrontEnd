@@ -1,74 +1,79 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { FaUser, FaEnvelope, FaPhone, FaUsers } from "react-icons/fa";
-import '../../../src/style.css';
-
-
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaUsers,
+  FaBars,
+  FaTimes
+} from "react-icons/fa";
+import "./Sidebar.css";
 
 export default function Sidebar() {
   const { user } = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="sidebar">
+    <>
+    {/* Hamburger Button (Mobile) */}
+         <button className="hamburger" onClick={() => setOpen(!open)}>
+           {open ? <FaTimes /> : <FaBars />}
+         </button>
+   
+         <div className={`sidebar ${open ? "open" : ""}`}>
+           {/* USER PROFILE */}
+       <div className="sidebar-user">
 
-      {/* ⭐ USER PROFILE BOX */}
-      <div className="sidebar-user">
-        <img
-          src={user?.image ? user.image : `https://i.pravatar.cc/60?u=${user?.email}`}
-          alt="profile"
-          className="sidebar-avatar"
-        />
+  {/* PROFILE IMAGE */}
+  <img
+    src={user?.image || `https://i.pravatar.cc/80?u=${user?.email}`}
+    alt="profile"
+    className="sidebar-avatar"
+  />
 
-     
-<div className="sidebar-user-info">
+  {/* ICON ROW */}
+  <div className="icon-row">
 
-  {/* NAME */}
-  <div className="info-item">
-    <FaUser className="icon" />
-    <span className="tooltip">{user?.name || "User Name"}</span>
-  </div>
-
-  {/* EMAIL */}
-  <div className="info-item">
-    <FaEnvelope className="icon" />
-    <span className="tooltip">{user?.email}</span>
-  </div>
-
-  {/* PHONE */}
-  <div className="info-item">
-    <FaPhone className="icon" />
-    <span className="tooltip">{user?.phone || "No Phone"}</span>
-  </div>
-
-  {/* TEAM */}
- <div className="info-item">
-   <Link to="/teams">
-  <FaUsers className="icon" />
- 
-    <span className="tooltip">{user?.team || user?.department || "Team"}</span>
-  </Link>
-</div>
-
-
-</div>
-
-
-
-
-      </div>
-
-      {/*  MENU ITEMS */}
-     <ul className="sidebar-menu">
-  <li><Link to="/dashboard">Dashboard</Link></li>
-  <li><Link to="/employees">Employees</Link></li>
-  <li><Link to="/attendance">Attendance</Link></li>
-  <li><Link to="/payroll">Payroll</Link></li>
-  
-  <li><Link to="/settings">Settings</Link></li>
-</ul>
-
-
+    <div className="icon-box">
+      <FaUser />
+      <span className="hover-text">{user?.name || "User Name"}</span>
     </div>
+
+    <div className="icon-box">
+      <FaEnvelope />
+      <span className="hover-text">{user?.email}</span>
+    </div>
+
+    <div className="icon-box">
+      <FaPhone />
+      <span className="hover-text">{user?.phone || "No Phone"}</span>
+    </div>
+
+    <Link to="/teams" className="icon-box">
+      <FaUsers />
+      <span className="hover-text">
+        {user?.team || user?.department || "Team"}
+      </span>
+    </Link>
+
+  </div>
+</div>
+
+
+         
+
+        {/* MENU */}
+        <ul className="sidebar-menu">
+          <li><Link to="/dashboard" onClick={() => setOpen(false)}>Dashboard</Link></li>
+          <li><Link to="/employees" onClick={() => setOpen(false)}>Employees</Link></li>
+          <li><Link to="/attendance" onClick={() => setOpen(false)}>Attendance</Link></li>
+           <li><Link to="/leaveapproval" onClick={() => setOpen(false)}>Leave</Link></li>
+          <li><Link to="/payroll" onClick={() => setOpen(false)}>Payroll</Link></li>
+          <li><Link to="/settings" onClick={() => setOpen(false)}>Settings</Link></li>
+        </ul>
+      </div>
+    </>
   );
 }

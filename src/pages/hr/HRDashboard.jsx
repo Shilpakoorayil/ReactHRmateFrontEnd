@@ -1,117 +1,157 @@
-import React, { useEffect, useState } from "react";
-import Sidebar from "../../components/admin/Sidebar";
-import Topbar from "../../components/admin/Topbar";
+import React, { useContext, useEffect, useState } from 'react'
+import Sidebar from '../../components/admin/Sidebar'
+import Topbar from '../../components/admin//Topbar'
+import Donut from '../../components/admin/Donut'
+import CalendarComp from '../../components/admin/Calendar'
+import { AuthContext } from '../../context/AuthContext'
+import AttandanceChart from "../../components/admin/AttandanceChart";
 
-export default function HRDashboard() {
-  const [attendance, setAttendance] = useState([]);
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend
+} from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+
+
+
+export default function Dashboard() {
+  const { user } = useContext(AuthContext)
+
+  //  NEW — store employees
   const [employees, setEmployees] = useState([]);
 
-  const today = new Date().toISOString().slice(0, 10);
-
+  // Fetch employees from backend
   useEffect(() => {
-    loadData();
+    loadEmployees();
   }, []);
 
-  const loadData = async () => {
-    const a = await fetch("http://localhost:5500/attendance").then(r => r.json());
-    const e = await fetch("http://localhost:5500/employees").then(r => r.json());
-    setAttendance(a);
-    setEmployees(e);
+  const loadEmployees = () => {
+    fetch("http://localhost:5500/employees")
+      .then(res => res.json())
+      .then(data => setEmployees(data))
+      .catch(err => console.log("Error loading employees:", err));
   };
 
-
-
- const getEmployeeName = (id) => {
-  const emp = employees.find(e => Number(e.id) === Number(id));
-  if (!emp) {
-    console.warn("Employee not found for ID:", id);
-    return "Invalid Employee";
-  }
-  return emp.name;
-};
-
-
-
-  // ✅ CHECK IN
-  const checkIn = async (employeeId) => {
-    const exists = attendance.find(
-      a => a.employeeId === employeeId && a.date === today
-    );
-
-    if (exists) {
-      alert("Already checked in today");
-      return;
-    }
-
-   const payload = {
-  employeeId: Number(employeeId),
-  date: today,
-  status: "Present",
-  checkIn: new Date().toLocaleTimeString(),
-  checkOut: ""
-};
-
-
-    await fetch("http://localhost:5500/attendance", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    loadData();
-  };
-
- 
+  // ⭐ Dynamic counts
+  const totalEmployees = employees.length;
+  const newEmployees = employees.filter(e => e.isNew).length;
+  const resignedEmployees = employees.filter(e => e.resigned).length;
+  // Attandance
+  const presentCount = employees.filter(e => e.status === "Present").length;
+  const absentCount = employees.filter(e => e.status === "Absent").length;
 
   return (
-    <div className="app">
-      {/* LEFT SIDEBAR */}
+    <div className='app'>
       <Sidebar />
-
-      {/* RIGHT CONTENT */}
-      <div className="main">
-        {/* TOP BAR */}
+      <div className='main'>
         <Topbar />
-        <div className="card">
-          <h3>Attendance</h3>
 
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Employee</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Action</th>
-              </tr>
-            </thead>
+        <section className='dashboard'>
+          <div className='hero'>
+            <div>
+              <p className='greet'>
+                Good Morning{user ? ', ' + user.email : ''}!
+              </p>
+              <h1>Employee Overview</h1>
+            </div>
+            {/* <div className='hero-actions'>
+              <button className='btn'>5 Important message</button>
+              <button className='btn primary'>Add a Request</button>
+            </div> */}
+          </div>
 
-            <tbody>
-              {attendance.map(a => (
-                <tr key={a.id}>
-                  <td>{getEmployeeName(a.employeeId)}</td>
-                  <td>{a.date}</td>
-                  <td>{a.status}</td>
-                  <td>{a.checkIn || "-"}</td>
-                  <td>{a.checkOut || "-"}</td>
-                  <td>
-                    <span
-                      className={`status ${a.status === "Present" ? "present" : "absent"
-                        }`}
-                    >
-                      {a.status}
-                    </span>
-                  </td>
+          {/*  DYNAMIC CARDS */}
+          <div className='cards-row'>
 
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            {/* TOTAL EMPLOYEES */}
+            <div className='card stat'>
+              <div className='icon'>👥</div>
+              <div className='value'>
+                {totalEmployees}
+                <span className='muted'>+5.15%</span>
+              </div>
+              <div className='label'>Total Employees</div>
+            </div>
 
-        
-        </div>
+            {/* JOB APPLICANTS - still static */}
+            <div className='card stat'>
+              <div className='icon'>🧾</div>
+              <div className='value'>
+                950 <span className='muted'>+2.05%</span>
+              </div>
+              <div className='label'>Job Applicants</div>
+            </div>
+
+            {/* NEW EMPLOYEES */}
+            <div className='card stat'>
+              <div className='icon'>➕</div>
+              <div className='value'>
+                {newEmployees}
+                <span className='muted red'>-5.15%</span>
+              </div>
+              <div className='label'>New Employees</div>
+            </div>
+
+            {/* RESIGNED EMPLOYEES */}
+            <div className='card stat'>
+              <div className='icon'>↩️</div>
+              <div className='value'>
+                {resignedEmployees}
+                <span className='muted'>-2.25%</span>
+              </div>
+              <div className='label'>Resigned Employees</div>
+            </div>
+
+          </div>
+          {/* ......................Main Grid............................................................... */}
+          <div className='main-grid'>
+
+
+
+          <div className="panel right">
+  <AttandanceChart present={presentCount} absent={absentCount} />
+</div>
+
+<div className='panel right'>
+  <Donut />
+</div>
+
+
+            {/* ..............................Employee lists....................................... */}
+            <div className='panel list'>
+              <h3>Employee List</h3>
+
+              <ul className='elist'>
+                {employees.length === 0 && <p>No employees found.</p>}
+
+                {employees.map(emp => (
+                  <li key={emp.id}>
+                    <img
+                      src={emp.image ? emp.image : `https://i.pravatar.cc/40?u=${emp.email}`}
+                      alt={emp.name}
+                    />
+                    <div>
+                      <strong>{emp.name}</strong>
+                      <div className='small'>{emp.role}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+
+
+          </div>
+
+
+
+
+        </section>
       </div>
     </div>
-  );
+  )
 }

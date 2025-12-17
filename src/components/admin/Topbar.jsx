@@ -13,7 +13,7 @@ export default function Topbar(){
 
     <header className="topbar">
   <div className="left">
-    <span className="logo">HRMatrix</span>
+    <span className="logo" >  HRMatrix</span>
   </div>
 
   <div className="right">

@@ -1,14 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from '../../components/admin/Sidebar'
 import Topbar from '../../components/admin//Topbar'
-import MiniChart from '../../components/admin/MiniChart'
 import Donut from '../../components/admin/Donut'
-import CalendarComp from '../../components/admin/Calendar'
 import { AuthContext } from '../../context/AuthContext'
 import AttandanceChart from "../../components/admin/AttandanceChart";
-
-
-
+import './Dashboard.css'
 import {
   Chart as ChartJS,
   ArcElement,
@@ -18,15 +14,22 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function Dashboard(){
+
+
+
+export default function Dashboard() {
   const { user } = useContext(AuthContext)
 
-  // ⭐ NEW — store employees
+  //  NEW — store employees
   const [employees, setEmployees] = useState([]);
+  //  Leaves state
+const [leaves, setLeaves] = useState([]);
 
-  // ⭐ Fetch employees from backend
+
+  // Fetch employees from backend
   useEffect(() => {
     loadEmployees();
+   loadLeaves();
   }, []);
 
   const loadEmployees = () => {
@@ -35,14 +38,46 @@ export default function Dashboard(){
       .then(data => setEmployees(data))
       .catch(err => console.log("Error loading employees:", err));
   };
+  const loadLeaves = () => {
+  fetch("http://localhost:5500/leaves")
+    .then(res => res.json())
+    .then(data => setLeaves(data))
+    .catch(err => console.log("Error loading leaves:", err));
+};
 
-  // ⭐ Dynamic counts
+
+  //  Dynamic counts
   const totalEmployees = employees.length;
   const newEmployees = employees.filter(e => e.isNew).length;
   const resignedEmployees = employees.filter(e => e.resigned).length;
   // Attandance
-const presentCount = employees.filter(e => e.status === "Present").length;
-const absentCount = employees.filter(e => e.status === "Absent").length;
+  const presentCount = employees.filter(e => e.status === "Present").length;
+  const absentCount = employees.filter(e => e.status === "Absent").length;
+  //  Approval status counts
+
+ const pendingLeaves = leaves.filter(l => l.status === "pending");
+const rejectedLeaves = leaves.filter(l => l.status === "rejected");
+
+ 
+
+
+
+const updateApprovalStatus = async (id, status) => {
+  await fetch(`http://localhost:5500/employees/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ approvalStatus: status })
+  });
+
+  // update UI instantly
+  setEmployees(prev =>
+    prev.map(e =>
+      e.id === id ? { ...e, approvalStatus: status } : e
+    )
+  );
+};
+
+
 
   return (
     <div className='app'>
@@ -54,19 +89,17 @@ const absentCount = employees.filter(e => e.status === "Absent").length;
           <div className='hero'>
             <div>
               <p className='greet'>
-                Good Morning{user ? ', ' + user.email : ''}!
+                Welcome Back {user ? ', ' + user.name : ''}!
               </p>
               <h1>Employee Overview</h1>
             </div>
-            <div className='hero-actions'>
-              <button className='btn'>5 Important message</button>
-              <button className='btn primary'>Add a Request</button>
-            </div>
+           
           </div>
 
-          {/* ⭐ DYNAMIC CARDS */}
+          {/*  DYNAMIC CARDS */}
           <div className='cards-row'>
             
+
             {/* TOTAL EMPLOYEES */}
             <div className='card stat'>
               <div className='icon'>👥</div>
@@ -106,55 +139,74 @@ const absentCount = employees.filter(e => e.status === "Absent").length;
               <div className='label'>Resigned Employees</div>
             </div>
 
-          </div>
 
+
+
+          </div>
+          {/* ......................Main Grid............................................................... */}
           <div className='main-grid'>
-            <div className='panel large'>
-              <div className='panel-header'>
-                <h3>Employee Performance</h3>
-                <button className='link'>View Details</button>
-              </div>
-              <MiniChart />
-            </div>
-            <div className="panel right">
-  <AttandanceChart
-    present={presentCount}
-    absent={absentCount}
-  />
+        
+{/* PENDING LEAVES COUNT */}
+<div className='card stat'>
+  <div className='icon'>⏳</div>
+  <div className='value'>
+    {pendingLeaves.length}
+  </div>
+  <div className='label'>Pending Leaves</div>
+</div>
+
+{/* REJECTED LEAVES COUNT */}
+<div className='card stat'>
+  <div className='icon'>❌</div>
+  <div className='value'>
+    {rejectedLeaves.length}
+  </div>
+  <div className='label'>Rejected Leaves</div>
 </div>
 
 
-            <div className='panel right'><Donut /></div>
 
-            <div className='panel calendar'>
-              <h3>Upcoming Schedules</h3>
-              <CalendarComp />
+
+
+
+          <div className="panel right">
+  <AttandanceChart present={presentCount} absent={absentCount} />
+</div>
+
+<div className='panel right'>
+  <Donut />
+</div>
+
+
+            {/* ..............................Employee lists....................................... */}
+            <div className='panel list'>
+              <h3>Employee List</h3>
+
+              <ul className='elist'>
+                {employees.length === 0 && <p>No employees found.</p>}
+
+                {employees.map(emp => (
+                  <li key={emp.id}>
+                    <img
+                      src={emp.image ? emp.image : `https://i.pravatar.cc/40?u=${emp.email}`}
+                      alt={emp.name}
+                    />
+                    <div>
+                      <strong>{emp.name}</strong>
+                      <div className='small'>{emp.role}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-         {/* ..............................Employee lists....................................... */}
-<div className='panel list'>
-  <h3>Employee List</h3>
-
-  <ul className='elist'>
-    {employees.length === 0 && <p>No employees found.</p>}
-
-    {employees.map(emp => (
-      <li key={emp.id}>
-        <img
-          src={emp.image ? emp.image : `https://i.pravatar.cc/40?u=${emp.email}`}
-          alt={emp.name}
-        />
-        <div>
-          <strong>{emp.name}</strong>
-          <div className='small'>{emp.role}</div>
-        </div>
-      </li>
-    ))}
-  </ul>
-</div>
 
 
           </div>
+
+
+
+
         </section>
       </div>
     </div>
