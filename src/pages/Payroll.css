@@ -1,22 +1,149 @@
-.btn-approve {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+/* PAGE LAYOUT */
+.app {
+  display: flex;
+  height: 100vh;
+  background: #f4f6fb;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.btn-pending {
-  background: #ffc107;
-  color: black;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 
-.btn-approve:hover,
-.btn-pending:hover {
-  opacity: 0.8;
+/* CARD */
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #333;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-bar select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  background: #f9fafc;
+  transition: all 0.3s ease;
+}
+
+.filter-bar select:hover {
+  border-color: #4f46e5;
+}
+
+.filter-bar select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+thead {
+  background: #f1f3ff;
+}
+
+thead th {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #444;
+}
+
+tbody td {
+  padding: 12px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+tbody tr {
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: #f9f9ff;
+}
+
+/* STATUS BADGES */
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status.Approved {
+  background: #e6f9f0;
+  color: #0f9d58;
+}
+
+.status.Pending {
+  background: #fff4e5;
+  color: #f29900;
+}
+
+.status.Rejected {
+  background: #fdecea;
+  color: #e53935;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* STATUS SELECT */
+.status-select {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Approved */
+.status-select.Approved {
+  background: #e6f9f0;
+  color: #0f9d58;
+}
+
+/* Pending */
+.status-select.Pending {
+  background: #fff4e5;
+  color: #f29900;
+}
+
+/* Hover */
+.status-select:hover {
+  opacity: 0.9;
 }

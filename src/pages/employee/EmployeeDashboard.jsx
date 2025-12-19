@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-
+import EmpSidebar from "../../components/employee/empSidebar";
 import Topbar from "../../components/admin/Topbar";
 import { AuthContext } from "../../context/AuthContext";
-
 import "./EmployeeDashboard.css";
-import EmpSidebar from "../../components/employee/empSidebar";
+
 export default function EmployeeDashboard() {
   const { user } = useContext(AuthContext);
   const [employee, setEmployee] = useState(null);

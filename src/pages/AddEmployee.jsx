@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import "../style.css";
 import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
+import { Link } from "react-router-dom";
 
 
 export default function AddEmployee() {
@@ -58,10 +59,14 @@ export default function AddEmployee() {
       <div className="main">
         {/* TOP BAR */}
         <Topbar />
-
+        <br />
+<Link to="/employees" className="btn primary">
+                           Back
+                         </Link>
         <div className='center'>
           <div className='card small'>
             <h3>Add Employee</h3>
+            
 
             {/* NAME INPUT */}
             <input

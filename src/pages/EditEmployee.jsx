@@ -3,6 +3,7 @@ import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
 import { updateEmployee, getEmployees } from "../api/employeesApi";
 import { useParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../style.css';
 
 export default function EditEmployee() {
@@ -45,6 +46,10 @@ export default function EditEmployee() {
       <div className="main">
         {/* TOP BAR */}
         <Topbar />
+        <br />
+        <Link to="/employees" className="btn primary">
+                                   Back
+                                 </Link>
 
         {/* PAGE CONTENT */}
         <div className='center'>

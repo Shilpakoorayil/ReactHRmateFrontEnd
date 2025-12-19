@@ -51,12 +51,7 @@ export default function EmpSidebar() {
                <span className="hover-text">{user?.phone || "No Phone"}</span>
              </div>
          
-             <div className="icon-box">
-               <FaUsers />
-               <span className="hover-text">
-                 {user?.team || user?.department || "Team"}
-               </span>
-             </div>
+          
          
            </div>
          </div>

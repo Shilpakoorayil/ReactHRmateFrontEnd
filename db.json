@@ -99,7 +99,7 @@
       "name": "Ashith",
       "email": "ashi@gmail.com",
       "designation": "Manager",
-      "department": "HR",
+      "department": "Finance",
       "isNew": true,
       "resigned": false
     },
@@ -133,7 +133,7 @@
     },
     {
       "id": "fb3e",
-      "name": "shabna",
+      "name": "shabna shabham",
       "email": "shabu@gmai.com",
       "designation": "Accountant",
       "department": "HR",
@@ -153,7 +153,7 @@
   "attendance": [
     {
       "id": "1",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-03",
       "checkIn": "09:05",
       "checkOut": "18:00",
@@ -161,7 +161,7 @@
     },
     {
       "id": "2",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-04",
       "checkIn": "09:10",
       "checkOut": "18:05",
@@ -169,7 +169,7 @@
     },
     {
       "id": "3",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-05",
       "checkIn": "09:00",
       "checkOut": "18:00",
@@ -177,7 +177,7 @@
     },
     {
       "id": "4",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-06",
       "checkIn": "09:12",
       "checkOut": "18:10",
@@ -185,7 +185,7 @@
     },
     {
       "id": "5",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-07",
       "checkIn": "09:00",
       "checkOut": "17:50",
@@ -193,7 +193,7 @@
     },
     {
       "id": "6",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-10",
       "checkIn": "09:08",
       "checkOut": "18:00",
@@ -201,7 +201,7 @@
     },
     {
       "id": "7",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-11",
       "checkIn": "09:00",
       "checkOut": "18:00",
@@ -209,7 +209,7 @@
     },
     {
       "id": "8",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-12",
       "checkIn": "09:20",
       "checkOut": "18:15",
@@ -217,7 +217,7 @@
     },
     {
       "id": "9",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-13",
       "checkIn": "09:05",
       "checkOut": "18:00",
@@ -225,7 +225,7 @@
     },
     {
       "id": "10",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-14",
       "checkIn": "09:00",
       "checkOut": "18:00",
@@ -233,7 +233,7 @@
     },
     {
       "id": "11",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-17",
       "checkIn": "09:10",
       "checkOut": "18:05",
@@ -273,7 +273,7 @@
     },
     {
       "id": "16",
-      "employeeId": 3,
+      "employeeId": 1,
       "date": "2025-11-24",
       "checkIn": "09:10",
       "checkOut": "18:05",
@@ -301,7 +301,7 @@
       "date": "2025-11-27",
       "checkIn": "",
       "checkOut": "",
-      "status": "Abset"
+      "status": "Absent"
     },
     {
       "id": "20",
@@ -395,16 +395,8 @@
       "id": "31",
       "employeeId": 1,
       "date": "2025-12-19",
-      "checkIn": "09:10",
-      "checkOut": "18:05",
-      "status": "Present"
-    },
-    {
-      "id": "32",
-      "employeeId": 1,
-      "date": "2025-12-20",
-      "checkIn": "09:00",
-      "checkOut": "17:55",
+      "checkIn": "09:30",
+      "checkOut": "",
       "status": "Present"
     }
   ],
@@ -412,7 +404,7 @@
     {
       "id": "1",
       "employeeId": 1,
-      "name": "James",
+      "name": "John",
       "month": "November",
       "year": 2025,
       "basic": 55000,
@@ -424,6 +416,103 @@
     {
       "id": "2",
       "employeeId": 1,
+      "name": "John",
+      "month": "December",
+      "year": 2025,
+      "basic": 55000,
+      "hra": 12000,
+      "deductions": 2500,
+      "netSalary": 64500,
+      "status": "Approved"
+    },
+    {
+      "id": "3",
+      "employeeId": 2,
+      "name": "Maria Silva",
+      "month": "November",
+      "year": 2025,
+      "basic": 55000,
+      "hra": 12000,
+      "deductions": 2000,
+      "netSalary": 64000,
+      "status": "Approved"
+    },
+    {
+      "id": "4",
+      "employeeId": 2,
+      "name": "Maria Silva",
+      "month": "December",
+      "year": 2025,
+      "basic": 55000,
+      "hra": 12000,
+      "deductions": 2500,
+      "netSalary": 64500,
+      "status": "Approved"
+    },
+    {
+      "id": "5",
+      "employeeId": 3,
+      "name": "Ria Silva",
+      "month": "November",
+      "year": 2025,
+      "basic": 55000,
+      "hra": 12000,
+      "deductions": 2000,
+      "netSalary": 64000,
+      "status": "Approved"
+    },
+    {
+      "id": "6",
+      "employeeId": 3,
+      "name": "Ria Silva",
+      "month": "December",
+      "year": 2025,
+      "basic": 55000,
+      "hra": 12000,
+      "deductions": 2500,
+      "netSalary": 64500,
+      "status": "Pending"
+    },
+    {
+      "id": "7",
+      "employeeId": 4,
+      "name": "Sumisha Sunder",
+      "month": "November",
+      "year": 2025,
+      "basic": 55000,
+      "hra": 12000,
+      "deductions": 2000,
+      "netSalary": 64000,
+      "status": "Approved"
+    },
+    {
+      "id": "8",
+      "employeeId": 4,
+      "name": "Sumisha Sunder",
+      "month": "December",
+      "year": 2025,
+      "basic": 55000,
+      "hra": 12000,
+      "deductions": 2500,
+      "netSalary": 64500,
+      "status": "Pending"
+    },
+    {
+      "id": "9",
+      "employeeId": 5,
+      "name": "Ashith",
+      "month": "November",
+      "year": 2025,
+      "basic": 55000,
+      "hra": 12000,
+      "deductions": 2000,
+      "netSalary": 64000,
+      "status": "Pending"
+    },
+    {
+      "id": "10",
+      "employeeId": 5,
+      "name": "Ashith",
       "month": "December",
       "year": 2025,
       "basic": 55000,

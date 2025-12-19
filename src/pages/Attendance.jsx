@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../style.css";
+ import './Emp.css';
 import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
 
@@ -116,7 +116,7 @@ useEffect(() => {
           
             <h3>Attendance</h3>
 
-          <div style={{ display: "flex", gap: "15px", marginBottom: "15px" }}>
+        <div className="filters">
 
             {/* EMPLOYEE FILTER */}
             <select
@@ -146,7 +146,10 @@ useEffect(() => {
 
           </div>
 
-          
+   <div className="table-wrapper">
+  
+
+       
 <table className="table">
   {totalPages > 1 && (
   <div className="pagination">
@@ -215,6 +218,7 @@ useEffect(() => {
 </tbody>
 
 </table>
+ </div>
 
   
 
