@@ -1,0 +1,22 @@
+.btn-approve {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-pending {
+  background: #ffc107;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-approve:hover,
+.btn-pending:hover {
+  opacity: 0.8;
+}

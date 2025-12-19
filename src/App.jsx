@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, AuthContext } from './context/AuthContext'
 import Login from './pages/Login'
-import Register from './pages/Register'
+
 
 import Employees from './pages/Employees'
 import AddEmployee from './pages/AddEmployee'
@@ -36,8 +36,8 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
          
+
           <Route path='/employees' element={<PrivateRoute roles={['admin', 'hr']}><Employees /></PrivateRoute>} />
           <Route path='/add-employee' element={<PrivateRoute roles={['admin']}><AddEmployee /></PrivateRoute>} />
           <Route path='/edit-employee/:id' element={<PrivateRoute roles={['admin', 'hr']}><EditEmployee /></PrivateRoute>} />
@@ -68,7 +68,7 @@ export default function App() {
             element={
               <PrivateRoute roles={['hr']}>
                 <Dashboard />
-              
+
               </PrivateRoute>
             }
           />
@@ -78,7 +78,7 @@ export default function App() {
             element={
               <PrivateRoute roles={['employee']}>
                 <EmployeeDashboard />
-               
+
               </PrivateRoute>
             }
           />
@@ -91,21 +91,21 @@ export default function App() {
             }
           />
           <Route
-  path="/my-payroll"
-  element={
-    <PrivateRoute roles={["employee"]}>
-      <EmployeePayroll />
-    </PrivateRoute>
-  }
-/>
-<Route
-  path="/leaveapproval"
-  element={
-    <PrivateRoute roles={["admin", "hr"]}>
-      <AdminLeaveApproval />
-    </PrivateRoute>
-  }
-/>
+            path="/my-payroll"
+            element={
+              <PrivateRoute roles={["employee"]}>
+                <EmployeePayroll />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/leaveapproval"
+            element={
+              <PrivateRoute roles={["admin", "hr"]}>
+                <AdminLeaveApproval />
+              </PrivateRoute>
+            }
+          />
 
 
 
@@ -113,11 +113,9 @@ export default function App() {
           <Route path='/empsettings' element={<PrivateRoute roles={['employee']}><EmpSettings /></PrivateRoute>} />
           <Route path='/employeedashboard' element={<PrivateRoute roles={['employee']}><EmployeeDashboard /></PrivateRoute>} />
           <Route path='/apply-leave' element={<PrivateRoute roles={['employee']}><ApplyLeave /></PrivateRoute>} />
-         <Route path='/my-attendance' element={<PrivateRoute roles={['employee']}><EmpAttendance /></PrivateRoute>} />
-         <Route path='/my-payroll' element={<PrivateRoute roles={['employee']}><EmployeePayroll /></PrivateRoute>} />
-         
-
-    <Route path='/dashboard' element={<PrivateRoute roles={['admin', 'hr']}><Dashboard /></PrivateRoute>} />
+          <Route path='/my-attendance' element={<PrivateRoute roles={['employee']}><EmpAttendance /></PrivateRoute>} />
+          <Route path='/my-payroll' element={<PrivateRoute roles={['employee']}><EmployeePayroll /></PrivateRoute>} />
+          <Route path='/dashboard' element={<PrivateRoute roles={['admin', 'hr']}><Dashboard /></PrivateRoute>} />
           <Route path='/' element={<Navigate to='/login' />} />
         </Routes>
       </BrowserRouter>

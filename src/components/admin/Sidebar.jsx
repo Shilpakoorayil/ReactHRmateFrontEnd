@@ -17,61 +17,73 @@ export default function Sidebar() {
 
   return (
     <>
-    {/* Hamburger Button (Mobile) */}
-         <button className="hamburger" onClick={() => setOpen(!open)}>
-           {open ? <FaTimes /> : <FaBars />}
-         </button>
-   
-         <div className={`sidebar ${open ? "open" : ""}`}>
-           {/* USER PROFILE */}
-       <div className="sidebar-user">
+      {/* Hamburger Button (Mobile) */}
+      <button className="hamburger" onClick={() => setOpen(!open)}>
+        {open ? <FaTimes /> : <FaBars />}
+      </button>
 
-  {/* PROFILE IMAGE */}
-  <img
-    src={user?.image || `https://i.pravatar.cc/80?u=${user?.email}`}
-    alt="profile"
-    className="sidebar-avatar"
-  />
+      <div className={`sidebar ${open ? "open" : ""}`}>
+        {/* USER PROFILE */}
+        <div className="sidebar-user">
 
-  {/* ICON ROW */}
-  <div className="icon-row">
+          {/* PROFILE IMAGE */}
+          <img
+            src={user?.image || `https://i.pravatar.cc/80?u=${user?.email}`}
+            alt="profile"
+            className="sidebar-avatar"
+          />
 
-    <div className="icon-box">
-      <FaUser />
-      <span className="hover-text">{user?.name || "User Name"}</span>
-    </div>
+          {/* ICON ROW */}
+          <div className="icon-row">
 
-    <div className="icon-box">
-      <FaEnvelope />
-      <span className="hover-text">{user?.email}</span>
-    </div>
+            <div className="icon-box">
+              <FaUser />
+              <span className="hover-text">{user?.name || "User Name"}</span>
+            </div>
 
-    <div className="icon-box">
-      <FaPhone />
-      <span className="hover-text">{user?.phone || "No Phone"}</span>
-    </div>
+            <div className="icon-box">
+              <FaEnvelope />
+              <span className="hover-text">{user?.email}</span>
+            </div>
 
-    <Link to="/teams" className="icon-box">
-      <FaUsers />
-      <span className="hover-text">
-        {user?.team || user?.department || "Team"}
-      </span>
-    </Link>
+            <div className="icon-box">
+              <FaPhone />
+              <span className="hover-text">{user?.phone || "No Phone"}</span>
+            </div>
 
-  </div>
-</div>
+            <Link to="/teams" className="icon-box">
+              <FaUsers />
+              <span className="hover-text">
+                {user?.team || user?.department || "Team"}
+              </span>
+            </Link>
+
+          </div>
+        </div>
 
 
-         
+
 
         {/* MENU */}
         <ul className="sidebar-menu">
           <li><Link to="/dashboard" onClick={() => setOpen(false)}>Dashboard</Link></li>
           <li><Link to="/employees" onClick={() => setOpen(false)}>Employees</Link></li>
           <li><Link to="/attendance" onClick={() => setOpen(false)}>Attendance</Link></li>
-           <li><Link to="/leaveapproval" onClick={() => setOpen(false)}>Leave</Link></li>
-          <li><Link to="/payroll" onClick={() => setOpen(false)}>Payroll</Link></li>
-          <li><Link to="/settings" onClick={() => setOpen(false)}>Settings</Link></li>
+          <li><Link to="/leaveapproval" onClick={() => setOpen(false)}>Leave</Link></li>
+
+
+          {user?.role === "admin" && (
+            <li><Link to="/payroll" onClick={() => setOpen(false)}>Payroll</Link></li>
+
+          )}
+          {user?.role === "admin" && (
+            <li><Link to="/settings" onClick={() => setOpen(false)}>Settings</Link></li>
+
+          )}
+
+
+
+
         </ul>
       </div>
     </>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Topbar from "../components/admin/Topbar";
 import Sidebar from "../components/admin/Sidebar";
+import './Payroll.css';
 
 export default function Payroll() {
   const [payroll, setPayroll] = useState([]);
@@ -22,6 +23,18 @@ export default function Payroll() {
     const emp = employees.find(e => Number(e.id) === Number(id));
     return emp ? emp.name : "Unknown";
   };
+  const updateStatus = async (id, newStatus) => {
+  await fetch(`http://localhost:5500/payroll/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ status: newStatus })
+  });
+
+  loadData(); // refresh table
+};
+
 
   return (
     <div className="app">
@@ -42,6 +55,8 @@ export default function Payroll() {
                 <th>Deductions</th>
                 <th>Net Salary</th>
                 <th>Status</th>
+<th>Action</th>
+
               </tr>
             </thead>
 
@@ -54,11 +69,34 @@ export default function Payroll() {
                   <td>₹{p.hra}</td>
                   <td>₹{p.deductions}</td>
                   <td><strong>₹{p.netSalary}</strong></td>
-                  <td>
-                    <span className={`status ${p.status === "Paid" ? "present" : "absent"}`}>
-                      {p.status}
-                    </span>
-                  </td>
+                <td>
+  <span
+    className={`status ${
+      p.status === "Approved" ? "present" : "absent"
+    }`}
+  >
+    {p.status}
+  </span>
+</td>
+
+<td>
+  {p.status === "Pending" ? (
+    <button
+      className="btn-approve"
+      onClick={() => updateStatus(p.id, "Approved")}
+    >
+      Approve
+    </button>
+  ) : (
+    <button
+      className="btn-pending"
+      onClick={() => updateStatus(p.id, "Pending")}
+    >
+      Mark Pending
+    </button>
+  )}
+</td>
+
                 </tr>
               ))}
             </tbody>
