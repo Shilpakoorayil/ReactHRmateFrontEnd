@@ -3,16 +3,16 @@ import { AuthContext } from "../../context/AuthContext";
 import "./EmpAttendance.css";
 import EmpSidebar from "../../components/employee/empSidebar";
 import Topbar from "../../components/admin/Topbar";
-
+//...............................................................................
 
 
 export default function EmployeeAttendance() {
-  const { user } = useContext(AuthContext);
+  const { user,dark } = useContext(AuthContext);
   //.......................................................
   const [attendance, setAttendance] = useState([]);
   const [leaves, setLeaves] = useState([]);
   const [todayAttendance, setTodayAttendance] = useState(null);
-  // ...............................................
+  // .......................................................
   const [editId, setEditId] = useState(null);
   const [editCheckIn, setEditCheckIn] = useState("");
   const [editCheckOut, setEditCheckOut] = useState("");
@@ -39,13 +39,13 @@ export default function EmployeeAttendance() {
         checkOut: editCheckOut
       })
     });
-    //Update section
+    //Update section.................................................
     const updated = await res.json();
     setAttendance(prev =>
       prev.map(a => (a.id === id ? updated : a))
     );
 
-    // Update today 's Attendance if edited row is today
+    // Update today 's Attendance if edited row is today.................
     if (todayAttendance?.id === id) {
       setTodayAttendance(updated);
     }
@@ -72,7 +72,7 @@ export default function EmployeeAttendance() {
   }, [user, today]);
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  // CHECK IN
+  // CHECK IN..........................................
   const handleCheckIn = async () => {
     const time = new Date().toLocaleTimeString("en-GB", {
       hour: "2-digit",
@@ -136,11 +136,19 @@ export default function EmployeeAttendance() {
 
   const totalPages = Math.ceil(sortedAttendance.length / rowsPerPage);
   //............................................................
+    useEffect(() => {
+      if (dark) document.documentElement.classList.add("dark");
+      else document.documentElement.classList.remove("dark");
+    }, [dark]);
   return (
     <div className="app">
       <EmpSidebar />
       <div className="main">
         <Topbar />
+
+
+
+
 
 
 
@@ -182,6 +190,7 @@ export default function EmployeeAttendance() {
                 <th>Check In</th>
                 <th>Check Out</th>
                 <th>Status</th>
+                <th></th>
               </tr>
             </thead>
 
@@ -225,45 +234,9 @@ export default function EmployeeAttendance() {
                     </span>
                   </td>
 
-                  {/* ACTIONS */}
-                  <td>
-                    {/*  ONLY TODAY CAN EDIT */}
-                    {a.date === today && editId !== a.id && (
-                      <>
-                        {!a.checkOut && (
-                          <button className="btn checkout" onClick={handleCheckOut}>
-                            Check Out
-                          </button>
-                        )}
-
-                        <button
-                          className="btn edit"
-                          onClick={() => handleEdit(a)}
-                        >
-                          Edit
-                        </button>
-                      </>
-                    )}
-
-                    {/*  SUBMIT / CANCEL */}
-                    {editId === a.id && (
-                      <>
-                        <button
-                          className="btn save"
-                          onClick={() => handleUpdate(a.id)}
-                        >
-                          Submit
-                        </button>
-
-                        <button
-                          className="btn cancel"
-                          onClick={() => setEditId(null)}
-                        >
-                          Cancel
-                        </button>
-                      </>
-                    )}
-                  </td>
+                
+              
+                
                 </tr>
               ))}
             </tbody>

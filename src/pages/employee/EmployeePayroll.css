@@ -1,10 +1,124 @@
-/* ........................payroll................. */
+/* ===== Layout ===== */
+.app {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* ===== Card ===== */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+/* ===== Table ===== */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* scroll on small screens */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.table th {
+  background: #f0f2f5;
+  font-weight: 600;
+}
+
+/* ===== Status Badges ===== */
 .approved {
-  color: green;
-  font-weight: bold;
+  color: #1b8a3b;
+  background: #e6f4ea;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
 }
 
 .pending {
-  color: rgb(240, 160, 12);
-  font-weight: bold;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* ========================= */
+/* 📱 Mobile Responsive View */
+/* ========================= */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .main {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  /* Convert table → card style */
+  .table {
+    min-width: 100%;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: block;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background: #fafafa;
+    padding: 10px;
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 5px;
+    border: none;
+    font-size: 14px;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #555;
+  }
+}
+
+/* ========================= */
+/* 💻 Large Screens */
+/* ========================= */
+@media (min-width: 1200px) {
+  .card {
+    max-width: 900px;
+  }
 }

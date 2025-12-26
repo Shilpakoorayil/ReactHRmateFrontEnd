@@ -15,7 +15,7 @@ import Settings from './pages/Settings'
 import Teams from './pages/Teams'
 import Dashboard from './pages/admin/Dashboard'
 import EmployeeDashboard from './pages/employee/EmployeeDashboard'
-import EmpSettings from './pages/employee/empSettings'
+
 import ApplyLeave from './pages/employee/ApplyLeave'
 import EmployeePayroll from './pages/employee/EmployeePayroll'
 import AdminLeaveApproval from './pages/admin/AdminLeaveApproval'
@@ -45,8 +45,12 @@ export default function App() {
             <Route path="/payroll" element={<PrivateRoute roles={['admin']}><Payroll /></PrivateRoute>} />
             <Route path="/attendance" element={<PrivateRoute><Attendance /></PrivateRoute>} />
 
-            <Route path="/admin/dashboard" element={<PrivateRoute roles={['admin']}><Dashboard /></PrivateRoute>} />
-            <Route path="/employee/employeedashboard" element={<PrivateRoute roles={['employee']}><EmployeeDashboard /></PrivateRoute>} />
+           <Route path="/settings" element={<PrivateRoute  roles={['admin','hr','employee']}><Settings /></PrivateRoute>} />
+           <Route path="/teams" element={<PrivateRoute  roles={['admin','hr']}><Teams /></PrivateRoute>} />
+          
+
+            <Route path="/dashboard" element={<PrivateRoute roles={['admin','hr']}><Dashboard /></PrivateRoute>} />
+            <Route path="/employeedashboard" element={<PrivateRoute roles={['employee']}><EmployeeDashboard /></PrivateRoute>} />
 
             <Route path="/apply-leave" element={<PrivateRoute roles={['employee']}><ApplyLeave /></PrivateRoute>} />
             <Route path="/my-payroll" element={<PrivateRoute roles={['employee']}><EmployeePayroll /></PrivateRoute>} />

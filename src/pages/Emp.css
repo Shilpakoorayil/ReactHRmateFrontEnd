@@ -51,7 +51,7 @@
 }
 
 .table th {
-  background: #f0f2f5;
+  background: #0952c0;
   font-weight: 600;
 }
 
@@ -120,5 +120,604 @@
   /* TABLE SCROLL */
   .table-wrapper {
     overflow-x: auto;
+  }
+}
+/* ..........................edit employee......................... */
+/* Smooth theme UI animation */
+* {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Responsive Center Layout */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 0;
+}
+
+/* Card Container */
+.card.small {
+  width: 430px;
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card.small h2 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1f2937;
+}
+
+/* Form Styling */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form input,
+.form select {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #c7c9d1;
+  background: #f8f9fc;
+  outline: none;
+}
+
+.form input:focus,
+.form select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0px 0px 6px rgba(79, 70, 229, 0.4);
+}
+
+/* Submit Button */
+.form .btn {
+  margin-top: 10px;
+  width: 100%;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+
+.form .btn:hover {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  transform: translateY(-2px);
+}
+
+/* Back Button */
+.btn.primary {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: #ffffff;
+  margin-left: 14px;
+}
+
+.btn.primary:hover {
+  background: #4338ca;
+}
+
+
+/* ================= DARK MODE ================= */
+.dark .card.small {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+.dark .card.small h2 {
+  color: #e2e8f0;
+}
+
+.dark .form input,
+.dark .form select {
+  background: #334155;
+  border-color: #475569;
+  color: #ffffff;
+}
+
+.dark .form input:focus,
+.dark .form select:focus {
+  border-color: #818cf8;
+  box-shadow: 0px 0px 8px rgba(129, 140, 248, 0.4);
+}
+
+.dark .btn.primary {
+  background: #3f3df4;
+}
+
+.dark .form .btn {
+  background: #6366f1;
+}
+
+.dark .form .btn:hover {
+  background: #4f46e5;
+}
+/* ........ */
+.error-text {
+  color: #e11d48;
+  font-size: 13px;
+  margin: -6px 0 8px;
+}
+
+/* Dark Mode */
+.dark .error-text {
+  color: #ffb3c1;
+}
+
+/* Input Styling */
+.card.small input,
+.card.small select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.card.small input:focus,
+.card.small select:focus {
+  border-color: #6366f1;
+}
+
+/* Dark Mode Input Style */
+.dark .card.small input,
+.dark .card.small select {
+  background: #1f2937;
+  color: #fff;
+  border: 1px solid #4b5563;
+}
+
+.dark .card.small input:focus,
+.dark .card.small select:focus {
+  border-color: #818cf8;
+}
+
+/* ...................................... */
+/* employee list */
+/* PAGE WRAPPER */
+.card {
+  background: #3f6de3;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0px 4px 18px rgba(0,0,0,0.08);
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.card h3 {
+  margin-bottom: 18px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+
+
+/* SEARCH INPUT */
+.search-input {
+  padding: 10px 14px;
+  width: 260px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0px 0px 6px rgba(0, 123, 255, 0.4);
+}
+
+
+
+/* BUTTONS */
+.btn.primary {
+  background: #007bff;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn.primary:hover {
+  background: #0056d2;
+}
+
+
+
+/* TABLE STYLING */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+/* .table thead {
+  background: #2177f7;
+} */
+/* 
+.table th {
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  color:black;
+  font-weight: 600;
+  cursor: pointer;
+  background:red;
+} */
+
+.table tbody tr {
+  background: #fff;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.table tbody tr:hover {
+  background: #eef5ff;
+  transform: scale(1.01);
+}
+
+.table td {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #333;
+}
+
+
+
+/* BADGES */
+.badge {
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.dept-badge {
+  background: #e8f0ff;
+  color: #004fc4;
+  border: 1px solid #bcd3ff;
+}
+
+
+
+/* ACTION BUTTONS */
+.edit-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.edit-link:hover {
+  text-decoration: underline;
+}
+
+.delete-btn {
+  color: #d9534f;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.delete-btn:hover {
+  color: #b40000;
+}
+
+
+
+/* PAGINATION */
+.pagination {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  border: none;
+  background: #e4e7eb;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.page-btn.active {
+  background: #007bff;
+  color: white;
+  font-weight: 600;
+}
+
+.page-btn:hover {
+  background: #75a7ff;
+  color: white;
+}
+/* TABLE HEADER BLUE STYLE */
+.table thead {
+  background: #007bff !important; /* Blue background */
+  color: #ffffff !important; /* White text */
+}
+
+.table thead th {
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #ffffff !important; /* ensure white text */
+  border-bottom: none;
+}
+
+
+
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .search-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .btn.primary {
+    width: 100%;
+    text-align: center;
+  }
+
+  table {
+    font-size: 12px;
+  }
+}
+/* .....attendance..... */
+/* GLOBAL ANIMATION */
+* {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+
+/* ==== CARD CONTAINER ==== */
+.card {
+  background: #ffffff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 14px;
+  width: 100%;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+
+/* ==== FILTERS SECTION ==== */
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.filters select,
+.admin-actions select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #f8f9ff;
+  cursor: pointer;
+}
+
+.filters select:focus,
+.admin-actions select:focus {
+  border-color: #6366f1;
+}
+
+
+/* ==== TABLE STYLE ==== */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.table thead {
+  background: #6366f1;
+}
+
+.table thead th {
+  padding: 12px 14px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+}
+
+.table tbody tr {
+  background: #ffffff;
+  text-align: center;
+  color: #333;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.06);
+  transition: .3s ease;
+}
+
+.table tbody tr:hover {
+  background: #eef2ff;
+  transform: scale(1.01);
+}
+
+.table td {
+  padding: 12px;
+  font-size: 14px;
+}
+
+
+/* STATUS BADGES */
+.status.present {
+  background: #22c55e;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.status.absent {
+  background: #dc2626;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+
+/* ==== PAGINATION ==== */
+.pagination {
+  margin: 12px 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  border: none;
+  background: #e0e7ff;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pagination button.active,
+.pagination button:hover {
+  background: #6366f1;
+  color: #ffffff;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+
+/* ================= DARK MODE ================= */
+.dark .card {
+  background: #1e293b;
+  color: #e2e8f0;
+  box-shadow: none;
+}
+
+.dark .filters select,
+.dark .admin-actions select {
+  background: #334155;
+  color: #e2e8f0;
+  border-color: #475569;
+}
+
+.dark .filters select:focus,
+.dark .admin-actions select:focus {
+  border-color: #0b0c10;
+}
+
+.dark .table thead {
+  background: #475569;
+}
+
+.dark .table tbody tr  {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.dark .table tbody tr:hover {
+  background: #1e293b;
+}
+
+.dark .status.present {
+  background: #10b981;
+}
+
+.dark .status.absent {
+  background: #ef4444;
+}
+
+.dark .pagination button {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+.dark .pagination button.active,
+.dark .pagination button:hover {
+  background: #04040c;
+  color: #fff;
+}
+.dark td{
+ color: #fff;
+}
+.dark h2{
+  color: white;
+}
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody tr {
+    display: block;
+    padding: 14px;
+    text-align: right;
+  }
+
+  .table tbody td {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #6366f1;
   }
 }

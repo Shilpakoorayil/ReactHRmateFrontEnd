@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import salaryReducer from "./salarySlice";
+import payrollReducer from "./payrollslie";
 
 export const store = configureStore({
   reducer: {
-    salary: salaryReducer
-  }
+    payroll: payrollReducer,
+  },
 });

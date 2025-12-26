@@ -40,9 +40,9 @@ export default function Login() {
       if (data.length > 0 && data[0].password === password) {
         login(data[0]);
 
-        if (data[0].role === "admin") navigate("/admin/dashboard");
-        else if (data[0].role === "hr") navigate("/hr/hrdashboard");
-        else navigate("/employee/employeedashboard");
+        if (data[0].role === "admin") navigate("/dashboard");
+        else if (data[0].role === "hr") navigate("/dashboard");
+        else navigate("/employeedashboard");
       } else {
         setError("Invalid email or password");
       }

@@ -173,3 +173,108 @@
     transform: translateX(0);
   }
 }
+/* .....dark..mode..option..... */
+/* Smooth transition for theme switch */
+* {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* DARK MODE GLOBAL */
+.dark {
+  background-color: #10141e;
+  color: #e5e7eb;
+}
+
+/* Topbar (You already added part) */
+.dark .topbar {
+  background: linear-gradient(135deg, #0a0f1a, #1a1e27);
+  color: #fff;
+}
+
+.dark .logo {
+  color: #ffffff;
+}
+
+/* Sidebar */
+.dark .sidebar {
+  background: #111827;
+  border-right: 1px solid #1f2937;
+}
+
+.dark .sidebar a {
+  color: #e5e7eb;
+}
+
+.dark .sidebar a:hover,
+.dark .sidebar .active {
+  background: #1f2937;
+  color: #fff;
+}
+
+/* Cards / Sections */
+.dark .card,
+.dark .teams-page {
+  background: #1f2937;
+  color: #e5e7eb;
+  box-shadow: none;
+}
+
+/* Table */
+.dark .table thead {
+  background: #30384a;
+}
+
+.dark .table thead th {
+  color: #ffffff;
+}
+
+.dark .table tbody tr {
+  background: #1c2432;
+  color: #e5e7eb;
+}
+
+.dark .table tbody tr:hover {
+  background: #2c3b52;
+}
+
+/* Pagination */
+.dark .page-btn {
+  background: #374151;
+  color: #e5e7eb;
+}
+
+.dark .page-btn.active,
+.dark .page-btn:hover {
+  background: #6366f1;
+  color: #ffffff;
+}
+
+/* Filter / Input */
+.dark .search-input,
+.dark .filter-select {
+  background: #262f3d;
+  color: #e5e7eb;
+  border: 1px solid #374151;
+}
+
+.dark .search-input:focus,
+.dark .filter-select:focus {
+  border-color: #818cf8;
+  box-shadow: 0px 0px 6px rgba(129, 140, 248, 0.5);
+}
+
+/* Links */
+.dark .edit-link {
+  color: #60a5fa;
+}
+
+.dark .delete-btn {
+  color: #f87171;
+}
+
+/* Status / Badge */
+.dark .badge {
+  background: #374151;
+  color: #fff;
+  border: none;
+}

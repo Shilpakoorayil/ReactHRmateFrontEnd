@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import {
@@ -12,8 +12,12 @@ import {
 import "./Sidebar.css";
 
 export default function Sidebar() {
-  const { user } = useContext(AuthContext);
+  const { user,dark } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+   useEffect(()=>{
+      if(dark) document.documentElement.classList.add('dark')
+      else document.documentElement.classList.remove('dark')
+    },[dark])
 
   return (
     <>
@@ -76,7 +80,7 @@ export default function Sidebar() {
             <li><Link to="/payroll" onClick={() => setOpen(false)}>Payroll</Link></li>
 
           )}
-          {user?.role === "admin" && (
+         {user?.role === "admin" && (
             <li><Link to="/settings" onClick={() => setOpen(false)}>Settings</Link></li>
 
           )}

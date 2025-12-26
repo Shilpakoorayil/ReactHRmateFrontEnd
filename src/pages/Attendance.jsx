@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from "react";
- import './Emp.css';
+import React, { useEffect, useState, useContext } from "react";
+import './Emp.css';
 import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
+import { AuthContext } from "../context/AuthContext";
 
 
 export default function Attendance() {
+  const { dark, toggleDark } = useContext(AuthContext)
   //To get attendance and employee name
   const [attendance, setAttendance] = useState([]);
   const [employees, setEmployees] = useState([]);
   //For Emp name and Month Sorting
   const [selectedEmployee, setSelectedEmployee] = useState("all");
   const [selectedMonth, setSelectedMonth] = useState("all");
- 
-///page
+
+  ///page
   const [currentPage, setCurrentPage] = useState(1);
-const rowsPerPage = 5; // you can change to 10
+  const rowsPerPage = 5; 
   const today = new Date().toISOString().slice(0, 10);
 
 
 
-
+  useEffect(() => {
+    if (dark) document.documentElement.classList.add('dark')
+    else document.documentElement.classList.remove('dark')
+  }, [dark])
 
   useEffect(() => {
     loadData();
@@ -43,32 +48,32 @@ const rowsPerPage = 5; // you can change to 10
     return emp.name;
   };
   // Filter .............................................................
-const filteredAttendance = attendance.filter(a => {
-  const empMatch =
-    selectedEmployee === "all" ||
-    String(a.employeeId) === selectedEmployee;
+  const filteredAttendance = attendance.filter(a => {
+    const empMatch =
+      selectedEmployee === "all" ||
+      String(a.employeeId) === selectedEmployee;
 
-  const monthMatch =
-    selectedMonth === "all" ||
-    a.date.slice(0, 7) === selectedMonth;
+    const monthMatch =
+      selectedMonth === "all" ||
+      a.date.slice(0, 7) === selectedMonth;
 
-  return empMatch && monthMatch;
-});
+    return empMatch && monthMatch;
+  });
 
-const indexOfLastRow = currentPage * rowsPerPage;
-const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
 
-const paginatedAttendance = filteredAttendance.slice(
-  indexOfFirstRow,
-  indexOfLastRow
-);
+  const paginatedAttendance = filteredAttendance.slice(
+    indexOfFirstRow,
+    indexOfLastRow
+  );
 
-const totalPages = Math.ceil(filteredAttendance.length / rowsPerPage);
-useEffect(() => {
-  setCurrentPage(1);
-}, [selectedEmployee, selectedMonth]);
+  const totalPages = Math.ceil(filteredAttendance.length / rowsPerPage);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedEmployee, selectedMonth]);
 
-// .....................................................
+  // .....................................................
 
 
 
@@ -100,6 +105,33 @@ useEffect(() => {
 
     loadData();
   };
+  // ..............................................................
+  // CHECK OUT
+  const checkOut = async (employeeId) => {
+    const todayRecord = attendance.find(
+      a => a.employeeId === employeeId && a.date === today
+    );
+
+    if (!todayRecord) {
+      alert("Employee hasn't checked in today yet!");
+      return;
+    }
+
+    if (todayRecord.checkOut) {
+      alert("Already checked out today!");
+      return;
+    }
+
+    await fetch(`http://localhost:5500/attendance/${todayRecord.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        checkOut: new Date().toLocaleTimeString()
+      })
+    });
+
+    loadData();
+  };
 
 
 
@@ -113,10 +145,13 @@ useEffect(() => {
         {/* TOP BAR */}
         <Topbar />
         <div className="card">
-          
-            <h3>Attendance</h3>
 
-        <div className="filters">
+          <h3>Attendance</h3>
+
+         
+
+
+          <div className="filters">
 
             {/* EMPLOYEE FILTER */}
             <select
@@ -137,90 +172,94 @@ useEffect(() => {
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
               <option value="all">All Months</option>
-              {[...new Set(attendance.map(a => a.date.slice(0, 7)))].map(month => (
-                <option key={month} value={month}>
-                  {month}
-                </option>
-              ))}
+
+              {[...new Set(attendance.map(a => a.date.slice(0, 7)))].map(month => {
+                const monthName = new Date(month + "-01").toLocaleString("en-US", { month: "long" });
+                return (
+                  <option key={month} value={month}>
+                    {monthName}
+                  </option>
+                );
+              })}
             </select>
+
 
           </div>
 
-   <div className="table-wrapper">
-  
+          <div className="table-wrapper">
 
-       
-<table className="table">
-  {totalPages > 1 && (
-  <div className="pagination">
-    <button
-      disabled={currentPage === 1}
-      onClick={() => setCurrentPage(p => p - 1)}
-    >
-      ⬅ Prev
-    </button>
 
-    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-      <button
-        key={page}
-        className={page === currentPage ? "active" : ""}
-        onClick={() => setCurrentPage(page)}
-      >
-        {page}
-      </button>
-    ))}
 
-    <button
-      disabled={currentPage === totalPages}
-      onClick={() => setCurrentPage(p => p + 1)}
-    >
-      Next ➡
-    </button>
-  </div>
-)}
+            <table className="table">
+              {totalPages > 1 && (
+                <div className="pagination">
+                  <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(p => p - 1)}
+                  >
+                    ⬅ Prev
+                  </button>
 
-  <thead>
-    <tr>
-      <th>Employee</th>
-      <th>Date</th>
-      <th>Check In</th>
-      <th>Check Out</th>
-      <th>Status</th>
-    </tr>
-  </thead>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                    <button
+                      key={page}
+                      className={page === currentPage ? "active" : ""}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </button>
+                  ))}
 
-<tbody>
-  {paginatedAttendance.length === 0 ? (
-    <tr>
-      <td colSpan="5" style={{ textAlign: "center" }}>
-        No attendance records found
-      </td>
-    </tr>
-  ) : (
-    paginatedAttendance.map(a => (
-      <tr key={a.id}>
-        <td>{getEmployeeName(a.employeeId)}</td>
-        <td>{a.date}</td>
-        <td>{a.checkIn || "-"}</td>
-        <td>{a.checkOut || "-"}</td>
-        <td>
-          <span
-            className={`status ${
-              a.status === "Present" ? "present" : "absent"
-            }`}
-          >
-            {a.status}
-          </span>
-        </td>
-      </tr>
-    ))
-  )}
-</tbody>
+                  <button
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(p => p + 1)}
+                  >
+                    Next ➡
+                  </button>
+                </div>
+              )}
 
-</table>
- </div>
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Date</th>
+                  <th>Check In</th>
+                  <th>Check Out</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
 
-  
+              <tbody>
+                {paginatedAttendance.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: "center" }}>
+                      No attendance records found
+                    </td>
+                  </tr>
+                ) : (
+                  paginatedAttendance.map(a => (
+                    <tr key={a.id}>
+                      <td>{getEmployeeName(a.employeeId)}</td>
+                      <td>{a.date}</td>
+                      <td>{a.checkIn || "-"}</td>
+                      <td>{a.checkOut || "-"}</td>
+                      <td>
+                        <span
+                          className={`status ${a.status === "Present" ? "present" : "absent"
+                            }`}
+                        >
+                          {a.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+
+            </table>
+          </div>
+
+
 
 
 

@@ -1,0 +1,121 @@
+/* Teams Page Layout */
+.teams-page {
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1b1a29;
+}
+
+/* Top Bar Filter */
+.teams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+
+  font-size: 14px;
+  cursor: pointer;
+  color: white;
+}
+
+.dark .filter-select {
+  background: #1f2937;
+  color: #f3f4f6;
+  border: 1px solid #374151;
+}
+
+/* Cards Display */
+.team-table {
+  display: none;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+/* Team Card */
+.team-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Employee Image */
+.team-card img {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 3px solid #9696a0;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+/* Employee Info */
+.team-card h4 {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #f90b0b;
+  cursor: pointer;
+}
+
+.team-card p {
+  font-size: 14px;
+  margin: 2px 0;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+/* Dark Mode */
+.dark .team-card {
+  background: #1e293b;
+  color: #f3f4f6;
+  border: 1px solid #334155;
+  cursor: pointer;
+}
+
+.dark .team-card:hover {
+  background: #273449;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+
+.dark .page-title {
+  color: #adb0c7;
+  cursor: pointer;
+}
+
+/* Loading & Empty styling */
+.empty, .loading {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .teams-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

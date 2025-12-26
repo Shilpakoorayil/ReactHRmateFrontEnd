@@ -1,4 +1,4 @@
-/* TOPBAR */
+TOPBAR
 .topbar {
   height: 60px;
   background: linear-gradient(135deg, #9994fb, #6366f1);
@@ -13,19 +13,47 @@
 
 /* LEFT */
 .topbar .logo {
-  font-size: 20px;
-  font-weight: 1200px;
+  font-size: 35px;
+  font-weight: 1600px;
   letter-spacing: 0.5px;
   margin-left: 50px;
   font: bold;
+  
 }
 
+
 /* RIGHT */
-.topbar .right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.topbar .logo  {
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff7a00,
+    #ffee00,
+    #00ff00,
+    #0099ff,
+    #6633ff,
+    #cc00ff
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
+.dark .topbar .logo {
+  background: linear-gradient(
+    90deg,
+    #ff66ff,
+    #9966ff,
+    #66ccff,
+    #66ffcc,
+    #ffff66,
+    #ffcc66,
+    #ff6699
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
 
 /* USER EMAIL */
 .user-email {
@@ -57,6 +85,7 @@
 /* DARK MODE SUPPORT */
 .dark .topbar {
   background: linear-gradient(135deg, #1f2937, #111827);
+  border-radius: 5%;
 }
 
 .dark .user-email {
@@ -71,3 +100,42 @@
 .dark .logout-btn:hover {
   background: #4b5563;
 }
+/* ....dark mode ..option...... */
+.btn.checkin {
+  background: #10b981;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.btn.checkout {
+  background: #ef4444;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-right: 12px;
+}
+.btn.checkoutt {
+  background: #380ba1;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.btn.checkin:hover,
+.btn.checkout:hover {
+  opacity: 0.9;
+}
+
+/* DARK MODE */
+.dark .btn.checkin { background: #0d9488; }
+.dark .btn.checkout { background: #dc2626; }
+

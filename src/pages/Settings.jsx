@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import "../style.css";
+import "./Setting.css";
 import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
 import { AuthContext } from "../context/AuthContext";

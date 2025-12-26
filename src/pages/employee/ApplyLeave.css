@@ -119,4 +119,138 @@
   font-size: 14px;
   font-weight: 500;
 }
+/* ...dark mode... */
+.leave-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.leave-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: 0.3s ease-in-out;
+}
+
+.dark .leave-card {
+  background: #1f2937;
+  color: #e5e7eb;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08);
+}
+
+.leave-card h2 {
+  text-align: center;
+  color: #4f46e5;
+  margin-bottom: 5px;
+}
+
+.dark .leave-card h2 {
+  color: #9ca3ff;
+}
+
+.sub-text {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.dark .sub-text {
+  color: #9ca3af;
+}
+
+.success-msg {
+  padding: 10px;
+  background: #d1fae5;
+  border-radius: 8px;
+  text-align: center;
+  color: #065f46;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.error-msg {
+  display: block;
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.leave-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+.dark input,
+.dark textarea {
+  background: #374151;
+  color: #fff;
+  border: 1px solid #525b69;
+}
+
+textarea {
+  min-height: 90px;
+  resize: none;
+}
+
+.submit-btn {
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+.dark .submit-btn {
+  background: #6366f1;
+}
+
+.dark .submit-btn:hover {
+  background: #818cf8;
+}
+
+@media (max-width: 768px) {
+  .leave-card {
+    max-width: 90%;
+    padding: 20px;
+  }
+}
 

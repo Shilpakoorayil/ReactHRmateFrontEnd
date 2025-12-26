@@ -4,8 +4,9 @@ import { AuthContext } from "../context/AuthContext";
 import Topbar from "../components/admin/Topbar";
 import { Link } from "react-router-dom";
 import { getEmployees, deleteEmployee } from "../api/employeesApi";
-import '../style.css';
+
 import Sidebar from "../components/admin/Sidebar";
+import './empllist.css'
 
 export default function Employees() {
   const { user } = useContext(AuthContext);

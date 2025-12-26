@@ -62,7 +62,8 @@ export default function EmpSidebar() {
           <li><Link to="/apply-leave" onClick={() => setOpen(false)}>Apply Leave</Link></li>
           <li><Link to="/my-attendance" onClick={() => setOpen(false)}>My Attendance</Link></li>
           <li><Link to="/my-payroll" onClick={() => setOpen(false)}>My Payroll</Link></li>
-          <li><Link to="/empsettings" onClick={() => setOpen(false)}>Settings</Link></li>
+          <li><Link to="/settings" onClick={() => setOpen(false)}>Settings</Link></li>
+         
         </ul>
       </div>
     </>

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import "./AdminLeaveApproval.css";
 import Sidebar from '../../components/admin/Sidebar'
-import Topbar from '../../components/admin//Topbar'
+import Topbar from '../../components/admin/Topbar'
+import { AuthContext } from "../../context/AuthContext";
+
 
 export default function AdminLeaveApproval() {
+   const { dark } = useContext(AuthContext)
   const [leaves, setLeaves] = useState([]);
   // PAGINATION
   const [visibleCount, setVisibleCount] = useState(5);
@@ -30,6 +33,10 @@ export default function AdminLeaveApproval() {
   };
   const visibleLeaves = leaves.slice(0, visibleCount);
 
+  useEffect(() => {
+    if (dark) document.documentElement.classList.add('dark')
+    else document.documentElement.classList.remove('dark')
+  }, [dark])
 
 
   return (

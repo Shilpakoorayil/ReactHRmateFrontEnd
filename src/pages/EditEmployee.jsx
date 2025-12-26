@@ -2,17 +2,25 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/admin/Sidebar";
 import Topbar from "../components/admin/Topbar";
 import { updateEmployee, getEmployees } from "../api/employeesApi";
-import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import '../style.css';
+import { useParams, useNavigate, Link } from "react-router-dom";
+import "./Emp.css";
 
 export default function EditEmployee() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", role: "" });
-  const DesignationArray = ["Admin", "HR", "Manager", "Employee"];
-  const DepartmentArray = ["HR", "IT", "Finance", "Marketing", "Operations"];
 
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    designation: "",
+    department: "",
+    joinDate: ""
+  });
+
+  const [errors, setErrors] = useState({});
+  const DesignationArray = ["Admin", "HR", "Manager", "Employee"];
+  const DepartmentArray = ["HR", "IT", "Finance", "Marketing"];
+  const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
     loadEmployee();
@@ -23,96 +31,106 @@ export default function EditEmployee() {
     const emp = list.find((e) => e.id == id);
     if (emp) setForm(emp);
   }
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  };
 
+  const validate = () => {
+    const err = {};
+
+    if (!form.name.trim()) err.name = "Name is required";
+    else if (!/^[A-Za-z ]+$/.test(form.name))
+      err.name = "Only alphabets allowed";
+
+ if (!form.email.trim()) err.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      err.email = "Invalid email format";
+
+    if (!form.department) err.department = "Select a department";
+    if (!form.designation) err.designation = "Select a designation";
+    if (!form.joinDate) err.joinDate = "Select a date";
+
+    setErrors(err);
+    return Object.keys(err).length === 0;
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!validate()) return;
+
     await updateEmployee(id, form);
     navigate("/employees");
   }
 
   return (
     <div className="app">
-      {/* LEFT SIDEBAR */}
       <Sidebar />
 
-      {/* RIGHT CONTENT */}
       <div className="main">
-        {/* TOP BAR */}
         <Topbar />
         <br />
-        <Link to="/employees" className="btn primary">
-                                   Back
-                                 </Link>
+        <Link to="/employees" className="btn primary">Back</Link>
 
-        {/* PAGE CONTENT */}
-        <div className='center'>
-          <div className='card small'>
-            {/* <div className="card form-card"> */}
+        <div className="center">
+          <div className="card small">
             <h2>Edit Employee</h2>
 
             <form onSubmit={handleSubmit} className="form">
+
               <input
                 name="name"
                 value={form.name}
-                onChange={handleChange}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="Name"
-                required
               />
+              {errors.name && <p className="error-text">{errors.name}</p>}
 
               <input
                 name="email"
                 value={form.email}
-                onChange={handleChange}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="Email"
-                required
               />
-              {/* Departments */}
+              {errors.email && <p className="error-text">{errors.email}</p>}
+
               <select
                 name="department"
                 value={form.department}
-                onChange={handleChange}
-                required
+                onChange={(e) => setForm({ ...form, department: e.target.value })}
               >
                 <option value="">Department</option>
-
-                {DepartmentArray.map(role => (
-                  <option key={role} value={role}>
-                    {role}
-                  </option>
+                {DepartmentArray.map((dep) => (
+                  <option key={dep} value={dep}>{dep}</option>
                 ))}
               </select>
-              {/* Designations */}
+              {errors.department && <p className="error-text">{errors.department}</p>}
+
               <select
                 name="designation"
                 value={form.designation}
-                onChange={handleChange}
-                required
+                onChange={(e) =>
+                  setForm({ ...form, designation: e.target.value })
+                }
               >
                 <option value="">Designation</option>
-
-                {DesignationArray.map(role => (
-                  <option key={role} value={role}>
-                    {role}
-                  </option>
+                {DesignationArray.map((des) => (
+                  <option key={des} value={des}>{des}</option>
                 ))}
               </select>
+              {errors.designation && <p className="error-text">{errors.designation}</p>}
 
+              {/* Disable Old Dates */}
+              <input
+                type="date"
+                name="joinDate"
+                value={form.joinDate}
+                min={today}
+                onChange={(e) => setForm({ ...form, joinDate: e.target.value })}
+              />
+              {errors.joinDate && <p className="error-text">{errors.joinDate}</p>}
 
-
-              <button type="submit" className="btn">
-                Update Employee
-              </button>
+              <button type="submit" className="btn">Update Employee</button>
             </form>
           </div>
         </div>
       </div>
-
-    </div>);
+    </div>
+  );
 }

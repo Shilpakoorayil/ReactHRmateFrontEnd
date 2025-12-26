@@ -1,14 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import EmpSidebar from "../../components/employee/empSidebar";
 import Topbar from "../../components/admin/Topbar";
 import "./ApplyLeave.css";
 
 export default function ApplyLeave() {
-  const { user } = useContext(AuthContext);
+  const { user, dark } = useContext(AuthContext);
 
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState({
+    fromDate: "",
+    toDate: "",
+    reason: "",
+    global: "",
+  });
 
   const [form, setForm] = useState({
     fromDate: "",
@@ -16,48 +21,61 @@ export default function ApplyLeave() {
     reason: ""
   });
 
+  const today = new Date().toISOString().split("T")[0];
+
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+    setError({ ...error, [e.target.name]: "", global: "" });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    let valid = true;
 
-    const newFrom = new Date(form.fromDate);
-    const newTo = new Date(form.toDate);
+    // Client validations
+    if (!form.fromDate) {
+      setError((prev) => ({ ...prev, fromDate: "Select From Date" }));
+      valid = false;
+    }
+    if (!form.toDate) {
+      setError((prev) => ({ ...prev, toDate: "Select To Date" }));
+      valid = false;
+    }
+    if (!form.reason.trim()) {
+      setError((prev) => ({ ...prev, reason: "Reason is required" }));
+      valid = false;
+    }
+    if (!valid) return;
 
-    // ✅ Validation 1: Date order
-    if (newTo < newFrom) {
-      setError("To Date cannot be earlier than From Date.");
+    const start = new Date(form.fromDate);
+    const end = new Date(form.toDate);
+
+    if (end < start) {
+      setError((prev) => ({ ...prev, global: "To Date cannot be earlier than From Date" }));
       return;
     }
 
-    // Fetch existing leaves
+    // Fetch existing leaves to check overlap
     const res = await fetch(
       `http://localhost:5500/leaves?employeeId=${user.id}`
     );
-    const existingLeaves = await res.json();
+    const existing = await res.json();
 
-    // ✅ Validation 2: Overlap
-    const isOverlap = existingLeaves.some((leave) => {
-      const existingFrom = new Date(leave.fromDate);
-      const existingTo = new Date(leave.toDate);
-
-      return newFrom <= existingTo && newTo >= existingFrom;
+    const isOverlap = existing.some((leave) => {
+      const lFrom = new Date(leave.fromDate);
+      const lTo = new Date(leave.toDate);
+      return start <= lTo && end >= lFrom;
     });
 
     if (isOverlap) {
-      setError(
-        "You have already applied for leave on this date. Please select another date."
-      );
+      setError((prev) => ({
+        ...prev,
+        global: "You already applied for leave during this period.",
+      }));
       return;
     }
 
-    // Submit leave
     const payload = {
       employeeId: user.id,
       employeeName: user.name,
@@ -70,7 +88,7 @@ export default function ApplyLeave() {
     await fetch("http://localhost:5500/leaves", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     });
 
     setSuccess(true);
@@ -78,6 +96,11 @@ export default function ApplyLeave() {
 
     setTimeout(() => setSuccess(false), 3000);
   };
+
+  useEffect(() => {
+    if (dark) document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
+  }, [dark]);
 
   return (
     <div className="app">
@@ -90,14 +113,13 @@ export default function ApplyLeave() {
 
             {success && (
               <div className="success-msg">
-                ✅ Your leave request has been submitted successfully
+                ✅ Leave submitted successfully!
               </div>
             )}
 
             <h2>Apply Leave</h2>
-            <p className="sub-text">Fill the form below to request leave</p>
 
-            {error && <span className="error-msg">{error}</span>}
+            {error.global && <span className="error-msg">{error.global}</span>}
 
             <form onSubmit={handleSubmit} className="leave-form">
               <div className="form-group">
@@ -105,10 +127,13 @@ export default function ApplyLeave() {
                 <input
                   type="date"
                   name="fromDate"
+                  min={today}
                   value={form.fromDate}
                   onChange={handleChange}
-                  required
                 />
+                {error.fromDate && (
+                  <small className="error-text">{error.fromDate}</small>
+                )}
               </div>
 
               <div className="form-group">
@@ -116,10 +141,13 @@ export default function ApplyLeave() {
                 <input
                   type="date"
                   name="toDate"
+                  min={form.fromDate || today}
                   value={form.toDate}
                   onChange={handleChange}
-                  required
                 />
+                {error.toDate && (
+                  <small className="error-text">{error.toDate}</small>
+                )}
               </div>
 
               <div className="form-group">
@@ -128,12 +156,15 @@ export default function ApplyLeave() {
                   name="reason"
                   value={form.reason}
                   onChange={handleChange}
-                  required
-                />
+                  placeholder="Explain your reason..."
+                ></textarea>
+                {error.reason && (
+                  <small className="error-text">{error.reason}</small>
+                )}
               </div>
 
               <button type="submit" className="submit-btn">
-                Submit Leave Request
+                Submit
               </button>
             </form>
 

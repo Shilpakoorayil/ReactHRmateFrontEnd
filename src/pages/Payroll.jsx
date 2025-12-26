@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Topbar from "../components/admin/Topbar";
 import Sidebar from "../components/admin/Sidebar";
 import "./Payroll.css";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Payroll() {
+  const { dark } =useContext(AuthContext)
   const [payrolls, setPayrolls] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [selectedName, setSelectedName] = useState("all");
@@ -20,6 +22,11 @@ const [selectedMonth, setSelectedMonth] = useState(currentMonth);
   useEffect(() => {
     loadData();
   }, []);
+  
+  useEffect(()=>{
+      if (dark) document.documentElement.classList.add('dark')
+    else document.documentElement.classList.remove('dark')
+  })
 
   const loadData = async () => {
     const p = await fetch("http://localhost:5500/payroll").then(r => r.json());
@@ -72,7 +79,7 @@ const visiblePayrolls = filteredPayrolls.slice(0, visibleCount);
   value={selectedMonth}
   onChange={e => setSelectedMonth(e.target.value)}
 >
-  <option value="all">All Months</option>
+  <option value="all">All</option>
 
   {[...new Set(payrolls.map(p => p.month))].map(month => (
     <option key={month} value={month}>
@@ -94,26 +101,33 @@ const visiblePayrolls = filteredPayrolls.slice(0, visibleCount);
                 <th>Status</th>
               </tr>
             </thead>
+
 <tbody>
-  {visiblePayrolls.map(p => (
-    <tr key={p.id}>
-      <td>{p.name}</td>
-      <td>{p.month}</td>
-      <td>{p.year}</td>
-      <td>₹{p.netSalary}</td>
-      <td>
-        <select
-          className={`status-select ${p.status}`}
-          value={p.status}
-          onChange={e => updateStatus(p.id, e.target.value)}
-        >
-          <option value="Approved">Approved</option>
-          <option value="Pending">Pending</option>
-        </select>
-      </td>
-    </tr>
-  ))}
+  {visiblePayrolls.map(p => {
+    const formattedDate = new Date(`${p.year}-${p.month}-01`)
+      .toLocaleString("en-US", { month: "short", year: "numeric" }); // Jan 2025
+
+    return (
+      <tr key={p.id}>
+        <td data-label="Employee">{p.name}</td>
+        <td data-label="Month">{formattedDate}</td>
+        <td data-label="Year">{p.year}</td>
+        <td data-label="Net Salary">₹ {Number(p.netSalary).toLocaleString()}</td>
+        <td data-label="Status">
+          <select
+            className={`status-select ${p.status}`}
+            value={p.status}
+            onChange={e => updateStatus(p.id, e.target.value)}
+          >
+            <option value="Approved">Approved</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </td>
+      </tr>
+    );
+  })}
 </tbody>
+
 
           </table>
            {/* PAGINATION */}
