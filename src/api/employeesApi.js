@@ -1,28 +1,23 @@
+import axios from "axios";
+
 const API = "http://localhost:5500/employees";
 
 export async function getEmployees() {
-  const r = await fetch(API);
-  return r.json();
+  const response = await axios.get(API);
+  return response.data;
 }
 
 export async function addEmployee(data) {
-  const r = await fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-  return r.json();
+  const response = await axios.post(API, data);
+  return response.data;
 }
 
 export async function updateEmployee(id, data) {
-  const r = await fetch(`${API}/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-  return r.json();
+  const response = await axios.put(`${API}/${id}`, data);
+  return response.data;
 }
 
 export async function deleteEmployee(id) {
-  await fetch(`${API}/${id}`, { method: "DELETE" });
+  const response = await axios.delete(`${API}/${id}`);
+  return response.data;
 }

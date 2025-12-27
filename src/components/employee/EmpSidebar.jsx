@@ -5,7 +5,6 @@ import {
   FaUser,
   FaEnvelope,
   FaPhone,
-  FaUsers,
   FaBars,
   FaTimes
 } from "react-icons/fa";
@@ -37,7 +36,7 @@ export default function EmpSidebar() {
            <div className="icon-row">
          
              <div className="icon-box">
-               <FaUser />
+               <FaUser/>
                <span className="hover-text">{user?.name || "User Name"}</span>
              </div>
          
@@ -62,7 +61,7 @@ export default function EmpSidebar() {
           <li><Link to="/apply-leave" onClick={() => setOpen(false)}>Apply Leave</Link></li>
           <li><Link to="/my-attendance" onClick={() => setOpen(false)}>My Attendance</Link></li>
           <li><Link to="/my-payroll" onClick={() => setOpen(false)}>My Payroll</Link></li>
-          <li><Link to="/settings" onClick={() => setOpen(false)}>Settings</Link></li>
+          
          
         </ul>
       </div>

@@ -158,6 +158,86 @@
       "joinDate": "2025-12-28",
       "isNew": true,
       "resigned": false
+    },
+    {
+      "id": "79ff",
+      "name": "SIJI",
+      "email": "siji@gmail.com",
+      "designation": "Team Lead",
+      "department": "IT",
+      "joinDate": "2025-12-27",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "9580",
+      "name": "Prabhul",
+      "email": "prabu@gmail.com",
+      "designation": "Team Lead",
+      "department": "IT",
+      "joinDate": "2025-12-27",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "dca4",
+      "name": "Usha",
+      "email": "us@gmail.com",
+      "designation": "Accountant",
+      "department": "Finance",
+      "joinDate": "2025-12-27",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "2f6a",
+      "name": "Prabha",
+      "email": "prabha@gmail.com",
+      "designation": "HR Manager",
+      "department": "Marketing",
+      "joinDate": "2025-12-27",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "7f14",
+      "name": "Prabha",
+      "email": "prabha@gmail.com",
+      "designation": "HR Manager",
+      "department": "Marketing",
+      "joinDate": "2025-12-27",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "a92e",
+      "name": "Rithmi",
+      "email": "rith@gmail.com",
+      "designation": "Software Engineer",
+      "department": "Finance",
+      "joinDate": "2025-12-27",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "5502",
+      "name": "mini",
+      "email": "mini@gmail.com",
+      "designation": "Software Engineer",
+      "department": "IT",
+      "joinDate": "2025-12-27",
+      "isNew": true,
+      "resigned": false
+    },
+    {
+      "id": "e4a6",
+      "name": "Niketh",
+      "email": "nichu@gmail.com",
+      "designation": "Software Engineer",
+      "department": "Finance",
+      "joinDate": "2026-01-03",
+      "isNew": true,
+      "resigned": false
     }
   ],
   "attendance": [
@@ -427,6 +507,18 @@
       "date": "2025-12-26",
       "checkIn": "00:49",
       "checkOut": "00:50",
+      "status": "Present"
+    },
+    {
+      "id": "288c",
+      "employeeId": 1,
+      "employeeName": "John Doe",
+      "email": "john@gmail.com",
+      "department": "IT",
+      "designation": "Employee",
+      "date": "2025-12-27",
+      "checkIn": "11:20",
+      "checkOut": "",
       "status": "Present"
     }
   ],
